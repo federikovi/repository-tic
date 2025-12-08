@@ -126,6 +126,65 @@
         body.dark-mode .subtitle {
             color: #a0a0a0;
         }
+
+ 
+
+code {
+    background: #f5f5f5;
+    color: #e83e8c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Monaco, monospace;
+    font-size: 0.9em;
+}
+
+body.dark-mode code {
+    background: #3a3a3a;
+    color: #ff79c6;
+}
+
+code {
+    background: #f5f5f5;
+    color: #e83e8c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Monaco, monospace;
+    font-size: 0.9em;
+}
+
+body.dark-mode code {
+    background: #3a3a3a;
+    color: #ff79c6;
+}
+
+.code-example {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Ubuntu Mono', monospace;
+    font-size: 0.95em;
+    overflow-x: auto;
+}
+
+code {
+    background: #f5f5f5;
+    color: #e83e8c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+.card-image.html {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.tag.html { 
+    background: #e0f2f1; 
+    color: #00695c; 
+}
         
         .gallery {
             max-width: 1200px;
@@ -206,7 +265,11 @@
         .tag.file { background: #f3e5f5; color: #6a1b9a; }
         .tag.email { background: #fce4ec; color: #c2185b; }
         .tag.feedback { background: #ffebee; color: #d32f2f; }
-        
+        .tag.shortcuts { background: #e1f5fe; color: #01579b; }
+.tag.logica { background: #f3e5f5; color: #6a1b9a; }
+.tag.collaborazione { background: #fff9c4; color: #f57f17; }
+.tag.screenshot { background: #e0f2f1; color: #00695c; }
+
         .card-description {
             color: #666;
             line-height: 1.6;
@@ -244,6 +307,17 @@
             padding: 50px;
             position: relative;
         }
+
+        .modal-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 800px;
+    width: 100%;
+    padding: 50px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
         
         body.dark-mode .modal-content {
             background: #2a2a2a;
@@ -419,6 +493,8 @@
             <button class="filter-btn" data-tag="google" onclick="filterByTag('google')">🔍 Google</button>
             <button class="filter-btn" data-tag="file" onclick="filterByTag('file')">📁 File</button>
             <button class="filter-btn" data-tag="email" onclick="filterByTag('email')">✉️ Email</button>
+            <button class="filter-btn" data-tag="html" onclick="filterByTag('html')">🌐 HTML</button>
+            <button class="filter-btn" data-tag="shortcuts" onclick="filterByTag('shortcuts')">⚡ Shortcuts</button>
         </div>
         
         <div class="accessibility-btns">
@@ -435,7 +511,7 @@
     
     <!-- GALLERY -->
     <div class="gallery" id="gallery">
-        <!-- CARD 1 -->
+        <!-- CARD 1  -->
         <div class="card" data-tags="classroom google" onclick="openModal('modal1')">
             <div class="card-image">🏫</div>
             <div class="card-body">
@@ -473,20 +549,406 @@
                 <div class="card-description">Scrivere email professionali</div>
             </div>
         </div>
+
+        <!-- CARD HTML 1: PhoenixCode -->
+        <div class="card" data-tags="html" onclick="openModal('modal4')">
+          <div class="card-image html">💻</div>
+          <div class="card-body">
+              <div class="card-title">Come usare PhoenixCode</div>
+              <div class="card-tags">
+                  <span class="tag html">HTML</span>
+              </div>
+              <div class="card-description">Editor online per scrivere HTML</div>
+          </div>
+      </div>
+      
+      <!-- CARD HTML 2: Titoli -->
+      <div class="card" data-tags="html" onclick="openModal('modal5')">
+          <div class="card-image html">📌</div>
+          <div class="card-body">
+              <div class="card-title">HTML: Titoli</div>
+              <div class="card-tags">
+                  <span class="tag html">HTML</span>
+              </div>
+              <div class="card-description">Creare titoli con H1, H2, H3</div>
+          </div>
+      </div>
+      
+      <!-- CARD HTML 3: Paragrafi -->
+      <div class="card" data-tags="html" onclick="openModal('modal6')">
+          <div class="card-image html">📝</div>
+          <div class="card-body">
+              <div class="card-title">HTML: Paragrafi</div>
+              <div class="card-tags">
+                  <span class="tag html">HTML</span>
+              </div>
+              <div class="card-description">Scrivere paragrafi con il tag P</div>
+          </div>
+      </div>
+      
+      <!-- CARD HTML 4: Liste -->
+      <div class="card" data-tags="html" onclick="openModal('modal7')">
+          <div class="card-image html">📋</div>
+          <div class="card-body">
+              <div class="card-title">HTML: Liste puntate</div>
+              <div class="card-tags">
+                  <span class="tag html">HTML</span>
+              </div>
+              <div class="card-description">Creare elenchi con UL e LI</div>
+          </div>
+      </div>
+      
+      <!-- CARD HTML 5: Struttura -->
+      <div class="card" data-tags="html" onclick="openModal('modal8')">
+          <div class="card-image html">🏗️</div>
+          <div class="card-body">
+              <div class="card-title">HTML: Struttura base</div>
+              <div class="card-tags">
+                  <span class="tag html">HTML</span>
+              </div>
+              <div class="card-description">La struttura completa di una pagina</div>
+          </div>
+      </div>
         
         <!-- CARD FEEDBACK -->
         <div class="card" data-tags="feedback" onclick="openFeedbackEmail()">
-            <div class="card-image feedback">💬</div>
-            <div class="card-body">
-                <div class="card-title">Invia Feedback</div>
-                <div class="card-tags">
-                    <span class="tag feedback">Feedback</span>
-                </div>
-                <div class="card-description">Hai un suggerimento? Mandami un'email!</div>
-            </div>
-        </div>
+          <div class="card-image feedback">💬</div>
+          <div class="card-body">
+              <div class="card-title">Invia Feedback</div>
+              <div class="card-tags">
+                  <span class="tag feedback">Feedback</span>
+              </div>
+              <div class="card-description">Hai un suggerimento? Mandami un'email!</div>
+          </div>
+      </div>
+
+
+      <!-- CARD -->
+<div class="card" data-tags="shortcuts" onclick="openModal('modalShortcuts')">
+  <div class="card-image">⚡</div>
+  <div class="card-body">
+      <div class="card-title">Shortcuts Tastiera</div>
+      <div class="card-tags">
+          <span class="tag shortcuts">Shortcuts</span>
+      </div>
+      <div class="card-description">Comandi veloci per lavorare più in fretta</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalShortcuts" class="modal" onclick="closeModalOutside(event, 'modalShortcuts')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modalShortcuts')">✕</button>
+      <h2 class="modal-title">⚡ Shortcuts Tastiera</h2>
+      <div class="modal-steps">
+          <h3 style="margin-bottom: 15px;">Cosa sono?</h3>
+          <p style="margin-bottom: 20px;">Gli shortcuts (scorciatoie) sono combinazioni di tasti che ti fanno risparmiare tempo!</p>
+          
+          <h3 style="margin-bottom: 15px;">📋 EDITING BASE</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>Ctrl + C</strong> (Mac: Cmd + C) → Copia</li>
+              <li><strong>Ctrl + V</strong> (Mac: Cmd + V) → Incolla</li>
+              <li><strong>Ctrl + X</strong> (Mac: Cmd + X) → Taglia</li>
+              <li><strong>Ctrl + Z</strong> (Mac: Cmd + Z) → Annulla</li>
+              <li><strong>Ctrl + Y</strong> (Mac: Cmd + Shift + Z) → Ripeti</li>
+              <li><strong>Ctrl + A</strong> (Mac: Cmd + A) → Seleziona tutto</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">💾 FILE</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>Ctrl + S</strong> (Mac: Cmd + S) → Salva</li>
+              <li><strong>Ctrl + O</strong> (Mac: Cmd + O) → Apri file</li>
+              <li><strong>Ctrl + P</strong> (Mac: Cmd + P) → Stampa</li>
+              <li><strong>Ctrl + W</strong> (Mac: Cmd + W) → Chiudi finestra</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">🌐 BROWSER</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>Ctrl + T</strong> (Mac: Cmd + T) → Nuova scheda</li>
+              <li><strong>Ctrl + Tab</strong> → Cambia scheda</li>
+              <li><strong>Ctrl + F</strong> (Mac: Cmd + F) → Cerca nella pagina</li>
+              <li><strong>Ctrl + D</strong> (Mac: Cmd + D) → Aggiungi preferito</li>
+              <li><strong>F5</strong> (Mac: Cmd + R) → Aggiorna pagina</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">✏️ TESTO</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>Ctrl + B</strong> (Mac: Cmd + B) → Grassetto</li>
+              <li><strong>Ctrl + I</strong> (Mac: Cmd + I) → Corsivo</li>
+              <li><strong>Ctrl + U</strong> (Mac: Cmd + U) → Sottolineato</li>
+          </ul>
+          
+          <div class="modal-tip">
+              💡 <strong>Esercizio:</strong> Prova a usare SOLO gli shortcuts per 10 minuti. Diventerai velocissimo!
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- CARD -->
+<div class="card" data-tags="file" onclick="openModal('modalEstensioni')">
+  <div class="card-image">📄</div>
+  <div class="card-body">
+      <div class="card-title">Estensioni File</div>
+      <div class="card-tags">
+          <span class="tag file">File</span>
+      </div>
+      <div class="card-description">Capire i tipi di file dal nome</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalEstensioni" class="modal" onclick="closeModalOutside(event, 'modalEstensioni')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modalEstensioni')">✕</button>
+      <h2 class="modal-title">📄 Estensioni File</h2>
+      <div class="modal-steps">
+          <h3 style="margin-bottom: 15px;">Cos'è un'estensione?</h3>
+          <p style="margin-bottom: 20px;">L'estensione è la parte finale del nome di un file, dopo il punto. Dice al computer che tipo di file è!</p>
+          
+          <p style="margin-bottom: 20px;"><strong>Esempio:</strong> <code>documento.docx</code> → l'estensione è <code>.docx</code> (file Word)</p>
+          
+          <h3 style="margin-bottom: 15px;">📝 DOCUMENTI</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>.txt</strong> → Testo semplice (Blocco Note)</li>
+              <li><strong>.docx</strong> → Documento Word</li>
+              <li><strong>.pdf</strong> → Documento universale (non modificabile)</li>
+              <li><strong>.odt</strong> → Documento LibreOffice</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">🖼️ IMMAGINI</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>.jpg / .jpeg</strong> → Foto (buona qualità, poco spazio)</li>
+              <li><strong>.png</strong> → Immagine (sfondo trasparente possibile)</li>
+              <li><strong>.gif</strong> → Immagine animata</li>
+              <li><strong>.svg</strong> → Grafica vettoriale (scalabile)</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">🎵 AUDIO & VIDEO</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>.mp3</strong> → File audio</li>
+              <li><strong>.wav</strong> → Audio alta qualità</li>
+              <li><strong>.mp4</strong> → Video</li>
+              <li><strong>.avi</strong> → Video Windows</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">💻 ALTRI</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>.xlsx</strong> → Foglio Excel</li>
+              <li><strong>.pptx</strong> → Presentazione PowerPoint</li>
+              <li><strong>.html</strong> → Pagina web</li>
+              <li><strong>.zip</strong> → File compresso/archivio</li>
+          </ul>
+          
+          <div class="modal-tip">
+              💡 <strong>Come vederle:</strong> Windows: Esplora File → Vista → ✓ Estensioni | Mac: Finder → Preferenze → ✓ Mostra estensioni
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- CARD -->
+<div class="card" data-tags="feedback collaborazione" onclick="openModal('modalFeedback')">
+  <div class="card-image feedback">🍔</div>
+  <div class="card-body">
+      <div class="card-title">Dare Feedback</div>
+      <div class="card-tags">
+          <span class="tag feedback">Feedback</span>
+      </div>
+      <div class="card-description">Il metodo hamburger per aiutare i compagni</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalFeedback" class="modal" onclick="closeModalOutside(event, 'modalFeedback')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modalFeedback')">✕</button>
+      <h2 class="modal-title">🍔 Metodo Hamburger</h2>
+      <div class="modal-steps">
+          <h3 style="margin-bottom: 15px;">Cos'è?</h3>
+          <p style="margin-bottom: 20px;">Il metodo hamburger è un modo gentile ed efficace di dare feedback (consigli) ai compagni!</p>
+          
+          <h3 style="margin-bottom: 15px;">📚 La struttura (come un hamburger!):</h3>
+          
+          <div style="background: #fff8e1; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffa726;">
+              <h4 style="margin-bottom: 10px;">🍞 PANE SOPRA (Positivo)</h4>
+              <p style="margin-bottom: 10px;">Inizia con qualcosa di <strong>positivo</strong> che ti piace del loro lavoro.</p>
+              <p style="font-style: italic; color: #666;">"Mi piace molto come hai organizzato i titoli!"</p>
+          </div>
+          
+          <div style="background: #ffebee; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ef5350;">
+              <h4 style="margin-bottom: 10px;">🥩 CARNE (Suggerimento)</h4>
+              <p style="margin-bottom: 10px;">Dai il <strong>suggerimento</strong> o la <strong>critica costruttiva</strong>.</p>
+              <p style="font-style: italic; color: #666;">"Potresti aggiungere più paragrafi per rendere il testo più leggibile."</p>
+          </div>
+          
+          <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #66bb6a;">
+              <h4 style="margin-bottom: 10px;">🍞 PANE SOTTO (Incoraggiamento)</h4>
+              <p style="margin-bottom: 10px;">Finisci con un <strong>incoraggiamento</strong> positivo.</p>
+              <p style="font-style: italic; color: #666;">"Con questa modifica sarà perfetto!"</p>
+          </div>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">✅ ESEMPIO COMPLETO</h3>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+              <p style="margin-bottom: 10px;">🍞 "Il tuo HTML è ben strutturato e i titoli sono chiari!"</p>
+              <p style="margin-bottom: 10px;">🥩 "Però mancano alcune liste puntate per gli ingredienti. Potresti usare il tag <code>&lt;ul&gt;</code>."</p>
+              <p>🍞 "Con questo miglioramento la tua ricetta sarà perfetta!"</p>
+          </div>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">❌ COSA NON FARE</h3>
+          <ul style="margin-left: 20px; line-height: 2; color: #d32f2f;">
+              <li>❌ "Questo fa schifo"</li>
+              <li>❌ "Hai sbagliato tutto"</li>
+              <li>❌ Solo critiche senza dire cosa va bene</li>
+              <li>❌ Essere vaghi: "Miglioralo" (come??)</li>
+          </ul>
+          
+          <div class="modal-tip">
+              💡 <strong>Ricorda:</strong> Il feedback serve ad AIUTARE, non a criticare! Sii gentile e specifico.
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="card" data-tags="logica giochi" onclick="openModal('modalSudoku')">
+  <div class="card-image">🔢</div>
+  <div class="card-body">
+      <div class="card-title">Come fare un Sudoku</div>
+      <div class="card-tags">
+          <span class="tag">Logica</span>
+      </div>
+      <div class="card-description">Imparare a risolvere i sudoku</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalSudoku" class="modal" onclick="closeModalOutside(event, 'modalSudoku')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modalSudoku')">✕</button>
+      <h2 class="modal-title">🔢 Come fare un Sudoku</h2>
+      <div class="modal-steps">
+          <h3 style="margin-bottom: 15px;">Cos'è un Sudoku?</h3>
+          <p style="margin-bottom: 20px;">Un puzzle logico con una griglia 9x9 divisa in 9 riquadri 3x3. Devi riempire ogni cella con numeri da 1 a 9.</p>
+          
+          <h3 style="margin-bottom: 15px;">📜 LE REGOLE</h3>
+          <ol style="margin-left: 20px; line-height: 2;">
+              <li>Ogni <strong>riga</strong> deve contenere i numeri da 1 a 9 (senza ripetizioni)</li>
+              <li>Ogni <strong>colonna</strong> deve contenere i numeri da 1 a 9 (senza ripetizioni)</li>
+              <li>Ogni <strong>riquadro 3x3</strong> deve contenere i numeri da 1 a 9 (senza ripetizioni)</li>
+          </ol>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">🎯 STRATEGIA BASE</h3>
+          <ol style="margin-left: 20px; line-height: 2;">
+              <li><strong>Cerca i numeri facili:</strong> Guarda dove manca un solo numero in una riga/colonna/riquadro</li>
+              <li><strong>Processo di eliminazione:</strong> Quali numeri NON possono stare in quella cella?</li>
+              <li><strong>Segna le possibilità:</strong> Scrivi piccoli i numeri possibili in ogni cella vuota</li>
+              <li><strong>Inizia dai numeri più frequenti:</strong> Se vedi tanti 5, cerca dove mettere gli altri 5</li>
+          </ol>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">💡 TRUCCHI</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li>Inizia dalle righe/colonne/riquadri con più numeri già inseriti</li>
+              <li>Usa una matita (per cancellare gli errori!)</li>
+              <li>Non tirare a indovinare: usa sempre la logica</li>
+              <li>Se sei bloccato, cambia zona della griglia</li>
+          </ul>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">🌐 SITI UTILI</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><strong>websudoku.com</strong> → Sudoku online con vari livelli</li>
+              <li><strong>sudoku.com</strong> → Con timer e statistiche</li>
+          </ul>
+          
+          <div class="modal-tip">
+              💡 <strong>Benefici:</strong> Il Sudoku migliora la concentrazione, la logica e la pazienza!
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- CARD -->
+<div class="card" data-tags="file screenshot" onclick="openModal('modalScreenshot')">
+  <div class="card-image">📸</div>
+  <div class="card-body">
+      <div class="card-title">Fare Screenshot</div>
+      <div class="card-tags">
+          <span class="tag file">File</span>
+      </div>
+      <div class="card-description">Catturare lo schermo del computer</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modalScreenshot" class="modal" onclick="closeModalOutside(event, 'modalScreenshot')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modalScreenshot')">✕</button>
+      <h2 class="modal-title">📸 Fare Screenshot</h2>
+      <div class="modal-steps">
+          <h3 style="margin-bottom: 15px;">Cos'è uno screenshot?</h3>
+          <p style="margin-bottom: 20px;">Uno screenshot è una "foto" di quello che vedi sullo schermo del computer.</p>
+          
+          <h3 style="margin-bottom: 15px;">💻 WINDOWS</h3>
+          
+          <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <h4 style="margin-bottom: 10px;"><strong>Metodo 1: Strumento di cattura</strong> (CONSIGLIATO)</h4>
+              <ol style="margin-left: 20px; line-height: 2;">
+                  <li>Premi <code>Win + Shift + S</code></li>
+                  <li>Lo schermo diventa grigio</li>
+                  <li>Seleziona l'area da catturare con il mouse</li>
+                  <li>L'immagine viene copiata (poi incolla con <code>Ctrl + V</code>)</li>
+              </ol>
+          </div>
+          
+          <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <h4 style="margin-bottom: 10px;"><strong>Metodo 2: Tutto lo schermo</strong></h4>
+              <ol style="margin-left: 20px; line-height: 2;">
+                  <li>Premi il tasto <code>Stamp</code> (o <code>PrtScn</code>)</li>
+                  <li>Apri Paint o Word</li>
+                  <li>Incolla con <code>Ctrl + V</code></li>
+                  <li>Salva l'immagine</li>
+              </ol>
+          </div>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">🍎 MAC</h3>
+          
+          <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <h4 style="margin-bottom: 10px;"><strong>Metodo 1: Area selezionata</strong> (CONSIGLIATO)</h4>
+              <ol style="margin-left: 20px; line-height: 2;">
+                  <li>Premi <code>Shift + Cmd + 4</code></li>
+                  <li>Seleziona l'area con il mouse</li>
+                  <li>L'immagine viene salvata sul Desktop</li>
+              </ol>
+          </div>
+          
+          <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <h4 style="margin-bottom: 10px;"><strong>Metodo 2: Tutto lo schermo</strong></h4>
+              <ol style="margin-left: 20px; line-height: 2;">
+                  <li>Premi <code>Shift + Cmd + 3</code></li>
+                  <li>L'immagine viene salvata sul Desktop</li>
+              </ol>
+          </div>
+          
+          <h3 style="margin-top: 25px; margin-bottom: 15px;">📱 CHROMEBOOK</h3>
+          <ul style="margin-left: 20px; line-height: 2;">
+              <li><code>Ctrl + Mostra finestre</code> → Tutto lo schermo</li>
+              <li><code>Ctrl + Shift + Mostra finestre</code> → Area selezionata</li>
+          </ul>
+          
+          <div class="modal-tip">
+              💡 <strong>Quando usare gli screenshot:</strong> Per mostrare errori alla prof, salvare risultati (typing test!), condividere informazioni.
+          </div>
+      </div>
+  </div>
+</div>
         
         <!-- AGGIUNGI ALTRE CARD QUI -->
+
+
+        
     </div>
     
     <div class="no-results" id="noResults">
@@ -499,7 +961,7 @@
             <h3>🏫 IPSSEOA Andrea Barbarigo - Venezia</h3>
             <p>👩‍🏫 <strong>Prof.ssa Federica Trevisan</strong></p>
             <p>📚 Tecnologie dell'Informazione e Comunicazione (Informatica)</p>
-            <p>📅 Anno Scolastico 2024/2025</p>
+            <p>📅 Anno Scolastico 2025/2026</p>
             <p>📧 <a href="mailto:federica.trevisan@barbarigo.edu.it" class="footer-email">federica.trevisan@barbarigo.edu.it</a></p>
         </div>
         
@@ -516,7 +978,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p><strong>Ultimo aggiornamento:</strong> 02 Dicembre 2024</p>
+            <p><strong>Ultimo aggiornamento:</strong> 04 Dicembre 2025</p>
             <p style="margin-top: 10px;">Creato con ❤️ per gli studenti del biennio</p>
         </div>
     </div>
@@ -580,6 +1042,229 @@
             </div>
         </div>
     </div>
+
+        <!-- MODALS HTML -->
+        <div id="modal4" class="modal" onclick="closeModalOutside(event, 'modal4')">
+          <div class="modal-content" onclick="event.stopPropagation()">
+              <button class="modal-close" onclick="closeModal('modal4')">✕</button>
+              <h2 class="modal-title">💻 Come usare PhoenixCode</h2>
+              <div class="modal-steps">
+                  <ol>
+                      <li>Vai su <strong>https://phcode.dev/</strong></li>
+                      <li>Clicca <strong>"Start Coding"</strong> (non serve account per provare)</li>
+                      <li>Vedrai 3 box:
+                          <ul style="margin-top: 10px;">
+                              <li><strong>HTML</strong> - dove scrivi il codice</li>
+                             
+                          </ul>
+                      </li>
+                      <li>Scrivi nel box HTML a sinistra e vedrai il risultato in tempo reale!</li>
+                      <li>A destra vedrai l'<strong>anteprima</strong> di quello che scrivi</li>
+                  </ol>
+                  <div class="modal-tip">
+                      💡 <strong>Trucco:</strong> Copia il tuo testo dal Google Doc, poi aggiungi i tag HTML su PhoenixCode!
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="modal5" class="modal" onclick="closeModalOutside(event, 'modal5')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('modal5')">✕</button>
+            <h2 class="modal-title">📌 HTML: Titoli</h2>
+            <div class="modal-steps">
+                <h3 style="margin-bottom: 15px;">Cosa sono i titoli?</h3>
+                <p style="margin-bottom: 20px;">I titoli servono per organizzare il testo. Ci sono 6 livelli, da H1 (più grande) a H6 (più piccolo).</p>
+                
+                <h3 style="margin-bottom: 15px;">Come si scrivono:</h3>
+                <div class="code-example">
+&lt;h1&gt;Titolo Principale&lt;/h1&gt;<br>
+&lt;h2&gt;Sottotitolo&lt;/h2&gt;<br>
+&lt;h3&gt;Sottotitolo più piccolo&lt;/h3&gt;
+                </div>
+                
+                <h3 style="margin-bottom: 15px;">Esempio percorso scuola:</h3>
+                <div class="code-example">
+&lt;h1&gt;Come arrivo a scuola&lt;/h1&gt;<br>
+&lt;h2&gt;Da Mestre&lt;/h2&gt;<br>
+&lt;h3&gt;Il percorso&lt;/h3&gt;
+                </div>
+                
+                <h3 style="margin-bottom: 15px;">Esempio ricetta:</h3>
+                <div class="code-example">
+&lt;h1&gt;Pasta alla Carbonara&lt;/h1&gt;<br>
+&lt;h2&gt;Ingredienti&lt;/h2&gt;<br>
+&lt;h2&gt;Preparazione&lt;/h2&gt;
+                </div>
+                
+                <div class="modal-tip">
+                    💡 <strong>Regola importante:</strong> Usa UN SOLO H1 per pagina (il titolo principale). Per tutto il resto usa H2, H3, ecc.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal6" class="modal" onclick="closeModalOutside(event, 'modal6')">
+      <div class="modal-content" onclick="event.stopPropagation()">
+          <button class="modal-close" onclick="closeModal('modal6')">✕</button>
+          <h2 class="modal-title">📝 HTML: Paragrafi</h2>
+          <div class="modal-steps">
+              <h3 style="margin-bottom: 15px;">Cosa sono i paragrafi?</h3>
+              <p style="margin-bottom: 20px;">I paragrafi sono blocchi di testo. Ogni paragrafo inizia con <code>&lt;p&gt;</code> e finisce con <code>&lt;/p&gt;</code>.</p>
+              
+              <h3 style="margin-bottom: 15px;">Come si scrivono:</h3>
+              <div class="code-example">
+&lt;p&gt;Questo è un paragrafo di testo.&lt;/p&gt;<br>
+&lt;p&gt;Questo è un altro paragrafo.&lt;/p&gt;
+              </div>
+              
+              <h3 style="margin-bottom: 15px;">Esempio percorso scuola:</h3>
+              <div class="code-example">
+&lt;h2&gt;Il mio percorso&lt;/h2&gt;<br>
+&lt;p&gt;Ogni giorno parto da casa alle 7:30.&lt;/p&gt;<br>
+&lt;p&gt;Prendo il bus numero 5 verso la stazione.&lt;/p&gt;<br>
+&lt;p&gt;Il viaggio dura circa 20 minuti.&lt;/p&gt;
+              </div>
+              
+              <h3 style="margin-bottom: 15px;">Esempio ricetta:</h3>
+              <div class="code-example">
+&lt;h2&gt;Preparazione&lt;/h2&gt;<br>
+&lt;p&gt;Metti l'acqua a bollire in una pentola grande.&lt;/p&gt;<br>
+&lt;p&gt;Quando bolle, aggiungi il sale e la pasta.&lt;/p&gt;<br>
+&lt;p&gt;Cuoci per 10 minuti.&lt;/p&gt;
+              </div>
+              
+              <div class="modal-tip">
+                  💡 <strong>Trucco:</strong> Ogni volta che vai a capo nel tuo testo, è un nuovo paragrafo!
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div id="modal7" class="modal" onclick="closeModalOutside(event, 'modal7')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal('modal7')">✕</button>
+        <h2 class="modal-title">📋 HTML: Liste puntate</h2>
+        <div class="modal-steps">
+            <h3 style="margin-bottom: 15px;">Cosa sono le liste?</h3>
+            <p style="margin-bottom: 20px;">Le liste servono per elencare cose. Si usano quando hai più elementi da elencare.</p>
+            
+            <h3 style="margin-bottom: 15px;">Come si scrivono:</h3>
+            <div class="code-example">
+&lt;ul&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Primo elemento&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Secondo elemento&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Terzo elemento&lt;/li&gt;<br>
+&lt;/ul&gt;
+            </div>
+            
+            <p style="margin: 15px 0;"><strong>Spiegazione:</strong></p>
+            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                <li><code>&lt;ul&gt;</code> = inizia la lista (unordered list)</li>
+                <li><code>&lt;li&gt;</code> = ogni punto della lista (list item)</li>
+                <li><code>&lt;/ul&gt;</code> = chiude la lista</li>
+            </ul>
+            
+            <h3 style="margin-bottom: 15px;">Esempio percorso scuola:</h3>
+            <div class="code-example">
+&lt;h2&gt;Mezzi che uso&lt;/h2&gt;<br>
+&lt;ul&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Bus numero 5&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Treno regionale&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;A piedi per 5 minuti&lt;/li&gt;<br>
+&lt;/ul&gt;
+            </div>
+
+            <h3 style="margin-bottom: 15px;">Esempio ricetta:</h3>
+            <div class="code-example">
+&lt;h2&gt;Ingredienti&lt;/h2&gt;<br>
+&lt;ul&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;400g spaghetti&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;150g guanciale&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;4 tuorli&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Pecorino q.b.&lt;/li&gt;<br>
+&lt;/ul&gt;
+            </div>
+            
+            <div class="modal-tip">
+                💡 <strong>Ricorda:</strong> Ogni <code>&lt;li&gt;</code> deve essere dentro <code>&lt;ul&gt;</code>!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal8" class="modal" onclick="closeModalOutside(event, 'modal8')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal('modal8')">✕</button>
+        <h2 class="modal-title">🏗️ HTML: Struttura base</h2>
+        <div class="modal-steps">
+            <h3 style="margin-bottom: 15px;">La struttura completa</h3>
+            <p style="margin-bottom: 20px;">Ogni pagina HTML ha questa struttura. Per ora su PhoenixCode scriviamo solo quello che va dentro <code>&lt;body&gt;</code>, ma è importante conoscerla!</p>
+            
+            <div class="code-example">
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="it"&gt;<br>
+&lt;head&gt;<br>
+&nbsp;&nbsp;&lt;title&gt;Titolo della pagina&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+<br>
+
+&nbsp;&nbsp;&lt;!-- QUI VA IL TUO CONTENUTO --&gt;<br>
+&nbsp;&nbsp;&lt;h1&gt;Ciao mondo!&lt;/h1&gt;<br>
+&nbsp;&nbsp;&lt;p&gt;Questa è la mia prima pagina.&lt;/p&gt;<br>
+<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+                </div>
+                
+                <h3 style="margin-bottom: 15px; margin-top: 25px;">Esempio completo percorso:</h3>
+                <div class="code-example">
+&lt;h1&gt;Come arrivo a scuola&lt;/h1&gt;<br>
+<br>
+&lt;h2&gt;Da Mestre&lt;/h2&gt;<br>
+&lt;p&gt;Parto da casa alle 7:30 ogni mattina.&lt;/p&gt;<br>
+<br>
+&lt;h2&gt;Mezzi che uso&lt;/h2&gt;<br>
+&lt;ul&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Bus numero 5 (15 minuti)&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Treno regionale (20 minuti)&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;A piedi (5 minuti)&lt;/li&gt;<br>
+&lt;/ul&gt;<br>
+<br>
+&lt;h2&gt;Consigli&lt;/h2&gt;<br>
+&lt;p&gt;Parti presto perché il treno è spesso in ritardo!&lt;/p&gt;
+                </div>
+                
+                <h3 style="margin-bottom: 15px; margin-top: 25px;">Esempio completo ricetta:</h3>
+                <div class="code-example">
+
+
+&lt;h1&gt;Pasta alla Carbonara&lt;/h1&gt;<br>
+<br>
+&lt;p&gt;Una ricetta romana classica e veloce.&lt;/p&gt;<br>
+<br>
+&lt;h2&gt;Ingredienti&lt;/h2&gt;<br>
+&lt;ul&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;400g spaghetti&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;150g guanciale&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;4 tuorli&lt;/li&gt;<br>
+&nbsp;&nbsp;&lt;li&gt;Pecorino romano&lt;/li&gt;<br>
+&lt;/ul&gt;<br>
+<br>
+&lt;h2&gt;Preparazione&lt;/h2&gt;<br>
+&lt;p&gt;Metti l'acqua a bollire.&lt;/p&gt;<br>
+&lt;p&gt;Taglia il guanciale a cubetti e rosolalo.&lt;/p&gt;<br>
+&lt;p&gt;Cuoci la pasta al dente.&lt;/p&gt;
+                </div>
+                
+                <div class="modal-tip">
+                    💡 <strong>Il tuo compito:</strong> Prendi il tuo testo dal Google Doc e aggiungici i tag HTML che hai imparato!
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         let currentTag = 'tutti';
