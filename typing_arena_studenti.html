@@ -1026,7 +1026,7 @@
                 }
                 
                 if (!iniziali || !classe || isNaN(wpm) || wpm === 0) continue;
-                if (!isNaN(accuracy) && accuracy < 80) continue;
+                if (!isNaN(accuracy) && accuracy < 70) continue;
 
                 allData.push({ classe, iniziali, wpm, accuracy: isNaN(accuracy) ? 100 : accuracy });
                 classSet.add(classe);
