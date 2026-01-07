@@ -738,7 +738,7 @@
 
         function calculateGrade(speedGrade, consistencyGrade, improvementGrade) {
             const finalScore = (speedGrade * 0.4) + (consistencyGrade * 0.4) + (improvementGrade * 0.2);
-            return finalScore.toFixed(2);
+            return Math.round(finalScore);
         }
 
         function getGradeFromScore(score) {
