@@ -688,9 +688,9 @@
                 return a.iniziali.localeCompare(b.iniziali);
             });
 
-            let csvOutput = 'Classe,Iniziali,WPM Medio,N. Test,Miglioramento,VOTO DECIMALE,VOTO FINALE\n';
+            let csvOutput = 'Classe,Iniziali,WPM Medio,N. Test,Miglioramento,VOTO\n';
             students.forEach(s => {
-                csvOutput += `${s.classe},${s.iniziali},${s.avgWpm},${s.numTests},+${s.improvement},${s.grade},${s.finalGrade}\n`;
+                csvOutput += `${s.classe},${s.iniziali},${s.avgWpm},${s.numTests},+${s.improvement},${s.grade}\n`;
             });
 
             const blob = new Blob([csvOutput], { type: 'text/csv' });
@@ -734,23 +734,6 @@
             if (improvement <= 15) return 8;
             if (improvement <= 20) return 9;
             return 10;
-        }
-
-        function convertToFinalGrade(decimalGrade) {
-            const grade = parseFloat(decimalGrade);
-            const integer = Math.floor(grade);
-            const decimal = grade - integer;
-            
-            // Conversione basata sui decimali
-            if (decimal < 0.25) {
-                return integer.toString();
-            } else if (decimal < 0.50) {
-                return integer + '+';
-            } else if (decimal < 0.75) {
-                return integer + '½';
-            } else {
-                return integer + '/' + (integer + 1);
-            }
         }
 
         function calculateGrade(speedGrade, consistencyGrade, improvementGrade) {
@@ -801,7 +784,6 @@
 
                 const finalScore = (speedGrade * 0.4) + (consistencyGrade * 0.4) + (improvementGrade * 0.2);
                 const grade = calculateGrade(speedGrade, consistencyGrade, improvementGrade);
-                const finalGrade = convertToFinalGrade(grade);
                 const gradeInfo = getGradeFromScore(finalScore);
 
                 return {
@@ -811,7 +793,6 @@
                     improvement,
                     finalScore,
                     grade,
-                    finalGrade,
                     ...gradeInfo
                 };
             }).sort((a, b) => b.finalScore - a.finalScore);
@@ -911,9 +892,7 @@
                         </div>
                         <div class="grade-display">
                             <div class="grade-number">${s.grade}</div>
-                            <div class="grade-label">DECIMALE</div>
-                            <div style="font-size: 1.5em; color: #ffd700; margin-top: 10px; font-weight: bold;">${s.finalGrade}</div>
-                            <div class="grade-label">REGISTRO</div>
+                            <div class="grade-label">VOTO</div>
                         </div>
                     </div>
                 `;
@@ -987,15 +966,9 @@
             let html = `
                 <div class="level-display">
                     <div class="level-display-title">VALUTAZIONE STUDENTE</div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
-                        <div class="grade-display">
-                            <div class="grade-number" style="font-size: 2.5em;">${s.grade}</div>
-                            <div class="grade-label">VOTO DECIMALE</div>
-                        </div>
-                        <div class="grade-display" style="background: rgba(255, 215, 0, 0.3); border-color: #ffd700;">
-                            <div class="grade-number" style="font-size: 2.5em;">${s.finalGrade}</div>
-                            <div class="grade-label">VOTO REGISTRO</div>
-                        </div>
+                    <div class="grade-display" style="margin: 20px auto; max-width: 200px;">
+                        <div class="grade-number" style="font-size: 3em;">${s.grade}</div>
+                        <div class="grade-label">VOTO FINALE</div>
                     </div>
                     <div class="level-display-badge ${s.badgeClass}">
                         ${s.level}
