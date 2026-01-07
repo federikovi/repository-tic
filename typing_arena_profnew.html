@@ -688,10 +688,9 @@
                 return a.iniziali.localeCompare(b.iniziali);
             });
 
-            let csvOutput = 'Classe,Iniziali,WPM Medio,N. Test,Miglioramento,VOTO DECIMALE,VOTO FINALE,DESCRIZIONE\n';
+            let csvOutput = 'Classe,Iniziali,WPM Medio,N. Test,Miglioramento,VOTO DECIMALE,VOTO FINALE\n';
             students.forEach(s => {
-                const description = `Valutazione Typing Speed (31/12/2025): ${s.avgWpm} WPM medi, ${s.numTests} test, +${s.improvement} WPM miglioramento`;
-                csvOutput += `${s.classe},${s.iniziali},${s.avgWpm},${s.numTests},+${s.improvement},${s.grade},${s.finalGrade},"${description}"\n`;
+                csvOutput += `${s.classe},${s.iniziali},${s.avgWpm},${s.numTests},+${s.improvement},${s.grade},${s.finalGrade}\n`;
             });
 
             const blob = new Blob([csvOutput], { type: 'text/csv' });
