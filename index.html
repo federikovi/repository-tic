@@ -381,6 +381,7 @@
     <div class="top-controls">
         <div class="filters">
             <button class="filter-btn active" data-tag="tutti" onclick="filterByTag('tutti')">📚 Tutti</button>
+            <button class="filter-btn" data-tag="word" onclick="filterByTag('word')">📝 Word</button>
             <button class="filter-btn" data-tag="html" onclick="filterByTag('html')">🌐 HTML</button>
             <button class="filter-btn" data-tag="css" onclick="filterByTag('css')">🎨 CSS</button>
             <button class="filter-btn" data-tag="general" onclick="filterByTag('general')">⚙️ General</button>
@@ -401,6 +402,133 @@
     <!-- GALLERY -->
     <div class="gallery" id="gallery">
         
+        <!-- ========== WORD CARDS ========== -->
+        <!-- CARD 1: Salvare File -->
+        <div class="card" data-tags="word" onclick="openModal('modalSalvare')">
+            <div class="card-image word">💾</div>
+            <div class="card-body">
+                <div class="card-title">Salvare su Questo PC</div>
+                <div class="card-tags">
+                    <span class="tag basic">Base</span>
+                </div>
+                <div class="card-description">Come salvare correttamente i documenti</div>
+            </div>
+        </div>
+
+       <!-- CARD 2: Intestazione -->
+       <div class="card" data-tags="word" onclick="openModal('modalIntestazione')">
+        <div class="card-image word">📋</div>
+        <div class="card-body">
+            <div class="card-title">Intestazione</div>
+            <div class="card-tags">
+                <span class="tag basic">Base</span>
+            </div>
+            <div class="card-description">Nome, classe, data in ogni documento</div>
+        </div>
+    </div>
+
+        <!-- CARD 3: Titoli -->
+        <div class="card" data-tags="word" onclick="openModal('modalTitoli')">
+            <div class="card-image word">📌</div>
+            <div class="card-body">
+                <div class="card-title">Titoli e Stili</div>
+                <div class="card-tags">
+                    <span class="tag basic">Base</span>
+                </div>
+                <div class="card-description">Titolo 1, Titolo 2, Titolo 3</div>
+            </div>
+        </div>
+
+        <!-- CARD 4: Formattazione -->
+        <div class="card" data-tags="word" onclick="openModal('modalFormattazione')">
+            <div class="card-image word">✍️</div>
+            <div class="card-body">
+                <div class="card-title">Formattazione Base</div>
+                <div class="card-tags">
+                    <span class="tag basic">Base</span>
+                </div>
+                <div class="card-description">Grassetto, corsivo, sottolineato</div>
+            </div>
+        </div>
+
+       <!-- CARD 5: Elenchi -->
+       <div class="card" data-tags="word" onclick="openModal('modalElenchi')">
+        <div class="card-image word">📋</div>
+        <div class="card-body">
+            <div class="card-title">Elenchi puntati e numerati</div>
+            <div class="card-tags">
+                <span class="tag basic">Base</span>
+            </div>
+            <div class="card-description">Liste organizzate</div>
+        </div>
+    </div>
+
+    <!-- CARD 6: Screenshot -->
+    <div class="card" data-tags="word" onclick="openModal('modalScreenshot')">
+        <div class="card-image word">📸</div>
+        <div class="card-body">
+            <div class="card-title">Inserire Screenshot</div>
+            <div class="card-tags">
+                <span class="tag basic">Base</span>
+            </div>
+            <div class="card-description">Catturare e incollare immagini</div>
+        </div>
+    </div>
+
+       <!-- CARD 7: Table of Contents -->
+       <div class="card" data-tags="word" onclick="openModal('modalTOC')">
+        <div class="card-image word">📑</div>
+        <div class="card-body">
+            <div class="card-title">Table of Contents</div>
+            <div class="card-tags">
+                <span class="tag advanced">Avanzato</span>
+            </div>
+            <div class="card-description">Indice automatico del documento</div>
+        </div>
+    </div>
+
+    <!-- CARD 8: Hyperlink -->
+    <div class="card" data-tags="word" onclick="openModal('modalLink')">
+        <div class="card-image word">🔗</div>
+        <div class="card-body">
+            <div class="card-title">Inserire Link</div>
+            <div class="card-tags">
+                <span class="tag advanced">Avanzato</span>
+            </div>
+            <div class="card-description">Link cliccabili alla Typing Arena</div>
+        </div>
+    </div>
+
+
+     <!-- CARD 9: Tabelle -->
+     <div class="card" data-tags="word" onclick="openModal('modalTabelle')">
+        <div class="card-image word">📊</div>
+        <div class="card-body">
+            <div class="card-title">Creare Tabelle</div>
+            <div class="card-tags">
+                <span class="tag advanced">Avanzato</span>
+            </div>
+            <div class="card-description">Tabelle per risultati Typing Arena</div>
+        </div>
+    </div>
+
+    <!-- CARD 10: Formula Voto -->
+    <div class="card" data-tags="word" onclick="openModal('modalFormula')">
+        <div class="card-image word">🧮</div>
+        <div class="card-body">
+            <div class="card-title">Calcolare il Voto</div>
+            <div class="card-tags">
+                <span class="tag advanced">Avanzato</span>
+            </div>
+            <div class="card-description">Formula voto Typing Arena</div>
+        </div>
+    </div>
+
+
+
+
+
+
         <!-- ========== HTML CARDS ========== -->
         
         <!-- CARD HTML 1: PhoenixCode -->
