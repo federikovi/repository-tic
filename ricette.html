@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Nostre Ricette — IPSSEOA Andrea Barbarigo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #1F3A44;
+  --primary-variant: #162A30;
+  --secondary: #3A6F7B;
+  --accent: #E8E4D9;
+  --background: #F6F6F4;
+  --surface: #FFFFFF;
+  --surface-variant: #E3E3E3;
+  --text-primary: #1E1E1E;
+  --text-secondary: #666666;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background);
+  font-family: 'Lato', sans-serif;
+  color: var(--text-primary);
+}
+
+/* HEADER */
+
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-variant));
+  text-align: center;
+  padding: 80px 20px 70px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.header-subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: white;
+  font-weight: 600;
+}
+
+header h1 em {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.header-desc {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
+}
+
+/* FILTRI */
+
+.filtri {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 30px 20px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--surface-variant);
+}
+
+.filtro-btn {
+  border: none;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: var(--surface-variant);
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro-btn:hover {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.filtro-btn.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* SEZIONI */
+
+.sezione {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 60px 30px;
+}
+
+.sezione-titolo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 40px;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 8px;
+}
+
+/* GRID */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* CARD */
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+
+.card-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.65rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.badge-dolce { background: var(--secondary); }
+.badge-salato { background: var(--primary); }
+.badge-guida { background: #444; }
+
+.card-img-placeholder {
+  height: 180px;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  color: white;
+}
+
+.card-body {
+  padding: 22px;
+  flex: 1;
+  border-top: 3px solid var(--secondary);
+}
+
+.card-classe {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.card-titolo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.card-studente {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.card-footer {
+  padding: 14px 22px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--primary);
+  border-top: 1px solid var(--surface-variant);
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-footer::after {
+  content: "→";
+}
+
+/* FOOTER */
+
+footer {
+  background-color: var(--primary-variant);
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  padding: 35px 20px;
+  font-size: 0.85rem;
+}
+
+footer strong {
+  color: var(--accent);
+}
+
+/* UTILITY */
+
+.hidden {
+  display: none !important;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="header-subtitle">IPSSEOA Andrea Barbarigo · Venezia</p>
+  <h1>Le Nostre <em>Ricette</em></h1>
+  <p class="header-desc">
+    Progetti HTML & CSS degli studenti delle classi seconde · Anno scolastico 2025/2026
+  </p>
+</header>
+
+<div class="filtri">
+  <button class="filtro-btn active" onclick="filtra(event, 'tutti')">Tutti</button>
+  <button class="filtro-btn" onclick="filtra(event, 'dolce')">🍰 Dolci</button>
+  <button class="filtro-btn" onclick="filtra(event, 'salato')">🍝 Salati</button>
+  <button class="filtro-btn" onclick="filtra(event, 'guida')">🗺️ Guide</button>
+</div>
+
+<div class="sezione">
+<!-- ========== 2A ========== -->
+<h2 class="sezione-titolo"><span>🍽️</span> Classe 2A</h2>
+<div class="grid" id="grid-2a">
+
+  <a class="card" href="2a/silvia.html" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🥒</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Tzatziki</h3>
+      <p class="card-studente">Silvia</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/gioele.html" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <img class="card-img" src="" alt="Risotto" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🍚</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Risotto di Gò</h3>
+      <p class="card-studente">Gioele</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/cristiano.html" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍝</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Lasagna</h3>
+      <p class="card-studente">Cristiano</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/ginevra.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">☕</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Tiramisù</h3>
+      <p class="card-studente">Ginevra</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/francesco.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🍰</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Meringata</h3>
+      <p class="card-studente">Francesco</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/noahn.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🇧🇷</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Pastel Brasiliano</h3>
+      <p class="card-studente">Noahn</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/melissa.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🍓</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Crostata alla Frutta</h3>
+      <p class="card-studente">Melissa</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/guido.html" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍗</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Pollo con Cipolle</h3>
+      <p class="card-studente">Guido</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/nina.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🎉</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Frittelle Veneziane</h3>
+      <p class="card-studente">Nina</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/destiny.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🇵🇭</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Ensaymada Filippina</h3>
+      <p class="card-studente">Destiny</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/denisa.html" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍋</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Pollo al Limone</h3>
+      <p class="card-studente">Denisa</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/rokhiya.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🍩</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Ciambellone</h3>
+      <p class="card-studente">Rokhiya</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/melania.html" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍖</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Polpette</h3>
+      <p class="card-studente">Melania</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="2a/victor.html" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🇪🇸</div>
+    <div class="card-body">
+      <p class="card-classe">2A</p>
+      <h3 class="card-titolo">Crema Catalana</h3>
+      <p class="card-studente">Victor</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+</div>
+
+
+<!-- ========== 2C ========== -->
+ <br><br><br><br>
+<h2 class="sezione-titolo"><span>🍽️</span> Classe 2C </h2>
+<div class="grid" id="grid-2c">
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <img class="card-img" src="https://blog.giallozafferano.it/valeriaciccotti/wp-content/uploads/2020/03/ipiccy_image.jpg" alt="Carbonara" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🍝</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Pasta alla Carbonara</h3>
+      <p class="card-studente">Fanny Battilana</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://www.ricettemiele.it/cache/media/2020/12/tiramisu_finale_bassa_598.jpg/7d4453c866ffa2cd6aa239a18f4a4084.jpg" alt="Tiramisù" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">☕</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Tiramisù</h3>
+      <p class="card-studente">Leonardo Cecchetelli</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480/img/recipe/ras/Assets/06706e0814517ddcb4f59d61ea03ce2f/Derivates/513daf74f39e98172193264d2e88d7fd1d32d330.jpg" alt="Crema Pasticcera" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🍮</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Crema Pasticcera</h3>
+      <p class="card-studente">Alvise Dal Maschio</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🌿</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Pasta al Pesto</h3>
+      <p class="card-studente">Diego Lacchin</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://www.lacassataceliaca.it/wp-content/uploads/2012/02/sacher9.jpg" alt="Sachertorte" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🍫</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Sachertorte</h3>
+      <p class="card-studente">Giorgia</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://www.mangiarebenevenezia.it/wp-content/uploads/2017/11/san-martino.jpg" alt="San Martino" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🐴</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Biscotti di San Martino</h3>
+      <p class="card-studente">Valentin Spataru</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍅</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Pasta all'Amatriciana</h3>
+      <p class="card-studente">Marcello</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://www.ricettedalmondo.it/images/foto-ricette/p/485-pancakes-2.jpg" alt="Pancake" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🥞</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Pancake</h3>
+      <p class="card-studente">Jiayi Xu</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍝</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Lasagne alla Bolognese</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://www.dolcesalato.com/wp-content/uploads/sites/5/2022/11/Panettone-Morandin_Petra-6384.jpg" alt="Panettone" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🎄</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Panettone</h3>
+      <p class="card-studente">Egle Zanotto</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://media.istockphoto.com/id/1248489319/it/foto/torta-tiramis%C3%B9-con-menta.jpg?s=612x612&w=0&k=20&c=dXJ8_czKwX_M8FLLqQWiM4jS4KoFIN1AbJtLuW_M-wo=" alt="Tiramisù Maya" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">☕</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Tiramisù</h3>
+      <p class="card-studente">Maya</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <img class="card-img" src="https://images.arla.com/recordid/400FD751-4B22-4CC2-BE79C5E5B417A2F5/easy-beef-lasagna-with-bechamel-sauce.jpg?width=768&height=400&mode=crop&format=webp" alt="Lasagna" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🍝</div>
+    <div class="card-body">
+      <p class="card-classe">2C</p>
+      <h3 class="card-titolo">Lasagna</h3>
+      <p class="card-studente">Ran Zhang</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+</div>
+
+<!-- ========== 2D ========== -->
+<br><br><br><br>
+<h2 class="sezione-titolo"><span>🗺️</span> Classe 2D — Guide al Barbarigo</h2>
+<div class="grid" id="grid-2d">
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">⛴️</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Dal Lido al Barbarigo</h3>
+      <p class="card-studente">Alice Fasolato</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🌟</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Marghera al Barbarigo</h3>
+      <p class="card-studente">Michel Cruz Soto</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🚌</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Jesolo al Barbarigo</h3>
+      <p class="card-studente">Gerard Dobos</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">⛵</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Dalla Giudecca al Barbarigo</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🚀</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Marghera al Barbarigo</h3>
+      <p class="card-studente">Cristopher</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🚶</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Oriago al Barbarigo</h3>
+      <p class="card-studente">Amanda Ndoja</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🏘️</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Casa al Barbarigo</h3>
+      <p class="card-studente">Emma Ramirez Lugo</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <img class="card-img" src="https://www.metropolitano.it/wp-content/uploads/2021/04/stazione-Santa-Lucia-di-Venezia.jpg" alt="Ferrovia" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🚂</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Ferrovia al Barbarigo</h3>
+      <p class="card-studente">Nancy Rudello</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🚌</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Favaro al Barbarigo</h3>
+      <p class="card-studente">Gioia Rusciano</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🏙️</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Mestre al Barbarigo</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">⛪</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Dal Redentore al Barbarigo</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+  <a class="card" href="#" data-cat="guida">
+    <span class="card-badge badge-guida">Guida</span>
+    <div class="card-img-placeholder">🚂</div>
+    <div class="card-body">
+      <p class="card-classe">2D</p>
+      <h3 class="card-titolo">Da Mogliano al Barbarigo</h3>
+      <p class="card-studente">Xinhao Yin</p>
+    </div>
+    <div class="card-footer">Vedi guida</div>
+  </a>
+
+</div>
+
+<!-- ========== 2F ========== -->
+<br><br><br><br>
+<h2 class="sezione-titolo"><span>🍽️</span> Classe 2F</h2>
+<div class="grid" id="grid-2f">
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://cdn.nonnapaperina.it/wp-content/uploads/2020/07/baklava-1.jpeg" alt="Baklava" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🇲🇰</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Baklava</h3>
+      <p class="card-studente">Bega Avmedoska</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍝</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Lasagna alla Bolognese</h3>
+      <p class="card-studente">Filippo Bonaventura</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <div class="card-img-placeholder">🍚</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Roast Pulao</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://www.soniaperonaci.it/wp-content/uploads/2023/09/torta-cocco-step-3.jpg" alt="Torta cocco" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🥥</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Torta al Cocco</h3>
+      <p class="card-studente">Marco Ciobanita</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <img class="card-img" src="https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2025/11/shendeltie-still-life-1.jpg?im=Resize,width=570;" alt="Shëndetlie" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🇦🇱</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Shëndetlie</h3>
+      <p class="card-studente">Chenrui Guo & Michelle Cavion</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">☕</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Tiramisù</h3>
+      <p class="card-studente">Michele La Cavera & Sergiu Prodan</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="salato">
+    <span class="card-badge badge-salato">Salato</span>
+    <img class="card-img" src="https://www.piattorecipes.com/wp-content/uploads/2023/11/Ziti-alla-Genovese-Recipe-Hero-2.jpg" alt="Genovese" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="card-img-placeholder" style="display:none">🧅</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Genovese alla Napoletana</h3>
+      <p class="card-studente">Salvatore Leo Migliardi</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">🇨🇺</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Flan Cubano</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+  <a class="card" href="#" data-cat="dolce">
+    <span class="card-badge badge-dolce">Dolce</span>
+    <div class="card-img-placeholder">☕</div>
+    <div class="card-body">
+      <p class="card-classe">2F</p>
+      <h3 class="card-titolo">Tiramisù</h3>
+      <p class="card-studente">—</p>
+    </div>
+    <div class="card-footer">Vedi ricetta</div>
+  </a>
+
+</div>
+
+</div>
+
+<footer>
+<strong>IPSSEOA Andrea Barbarigo</strong><br>
+Progetti HTML & CSS · Classi Seconde · 2025/2026
+</footer>
+
+<script>
+function filtra(e, cat) {
+  document.querySelectorAll('.filtro-btn')
+    .forEach(btn => btn.classList.remove('active'));
+
+  e.target.classList.add('active');
+
+  document.querySelectorAll('.card').forEach(card => {
+    if (cat === 'tutti' || card.dataset.cat === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
