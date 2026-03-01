@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Barbarigo - Marghera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@600;800&family=Segoe+UI&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --colore-primario: #ff4d4d;
+            --bus-color: #ffa500;
+            --battelli-color: #4da6ff;
+            --cultura-color: #4dff88;
+        }
+
+        /* --- ANIMAZIONI --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 77, 77, 0.6); }
+            50% { text-shadow: 0 0 40px rgba(255, 77, 77, 0.9), 0 0 10px rgba(255, 255, 255, 0.5); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #night-sky {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 90%;
+            padding: 50px 0;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--colore-primario);
+            font-size: clamp(24px, 6vw, 42px);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: titleGlow 3s infinite ease-in-out, fadeInUp 1s ease-out;
+            margin-bottom: 60px;
+        }
+
+        .sezione {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .sezione:nth-of-type(1) { animation-delay: 0.2s; }
+        .sezione:nth-of-type(2) { animation-delay: 0.4s; }
+        .sezione:nth-of-type(3) { animation-delay: 0.6s; }
+
+        .sezione:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .bus-border { border-left: 6px solid var(--bus-color); }
+        .battelli-border { border-left: 6px solid var(--battelli-color); }
+        .cultura-border { border-left: 6px solid var(--cultura-color); }
+
+        .social-box {
+            background: rgba(0,0,0,0.5);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #ff005044;
+            margin: 40px 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.8s;
+            opacity: 0;
+        }
+
+        .profile-pic {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 3px solid #ff0050;
+            margin-bottom: 15px;
+            transition: transform 0.5s;
+        }
+
+        .profile-pic:hover { transform: rotate(360deg) scale(1.1); }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 8px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255,0,80,0.4); }
+        .tk { background: #ff0050; }
+        .yt { background: #ff0000; }
+
+        .credits-card {
+            margin-top: 60px;
+            padding: 35px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        .creator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .creator-item {
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .creator-item:hover { transform: scale(1.1); }
+        .creator-item:hover .creator-img { animation: float 2s infinite ease-in-out; }
+
+        .creator-img {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            margin-bottom: 10px;
+            object-fit: cover;
+            background: #222;
+        }
+
+        .prof-special { border-color: gold; }
+        .leclerc-special { border-color: #ff4d4d; }
+        .name { font-size: 0.75rem; font-weight: bold; }
+        .role { font-size: 0.6rem; color: #888; margin-top: 3px; text-align: center; }
+
+        .mappa-img { 
+            width: 100%; 
+            border-radius: 15px; 
+            margin: 30px 0; 
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.7s;
+        }
+
+        .developer-footer {
+            margin-top: 40px;
+            padding-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .dev-name {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--colore-primario);
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="night-sky"></canvas>
+
+    <div class="container">
+        <h1>Come Raggiungere Il Barbarigo Da Marghera</h1>
+
+        <section class="sezione bus-border">
+            <h2 style="color:var(--bus-color)">🚌 Autobus</h2>
+            <p>Linee 6, 6L, 53RE, 53E, 66 | Tempo stimato: 15-20 minuti</p>
+        </section>
+
+        <section class="sezione battelli-border">
+            <h2 style="color:var(--battelli-color)">⛴️ Battelli</h2>
+            <p>Linee 2, 2/, 4.2, 4.1, 5.1, 5.2, 1 o TAXI Acqueo</p>
+            <ul style="list-style: none; padding: 0;">
+                <li>⏱️ 40 min per la linea 4 | ⏱️ 20 min per la linea 5</li>
+                <li>⏱️ 10 min per 2 e 2/ | ⏱️ 16 min per la linea 1</li>
+            </ul>
+        </section>
+
+        <section class="sezione cultura-border">
+            <h2 style="color:var(--cultura-color)">🏛️ Cultura e Turismo</h2>
+            <p>Esplora la Basilica di San Marco, il Palazzo Ducale e il Ponte dei Sospiri.</p>
+        </section>
+
+        <img class="mappa-img" src="https://avm.avmspa.it/sites/default/files/mestre.png">
+
+        <div class="social-box">
+
+            <h3 style="font-family: 'Montserrat', sans-serif;">F4D3._EDITZ</h3>
+            <a href="https://www.tiktok.com/@f4d3._editz" target="_blank" class="btn tk">TikTok</a>
+            <a href="https://www.youtube.com/@f4d3._editz" target="_blank" class="btn yt">YouTube</a>
+        </div>
+
+        <div class="credits-card">
+            <p style="font-family: 'Montserrat', sans-serif; font-weight: bold; margin: 0;">Sviluppo Tecnico e Ricerca</p>
+            <p style="color: #666; font-size: 0.8rem; margin: 10px 0 25px; line-height: 1.4;">
+                Progetto iniziato in classe e completato con circa <strong>5-6 ore di lavoro a casa</strong>.<br>
+                Ho utilizzato quasi <strong>100 tutorial professionali</strong> per affinare il codice e il design.
+            </p>
+            
+            <div class="creator-grid">
+                <div class="creator-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3429/3429433.png" class="creator-img prof-special">
+                    <span class="name">Prof. Trevisan</span>
+                    <span class="role">Supervisore Progetto</span>
+                </div>
+                <div class="creator-item">
+         
+                    
+                    <span class="role">Banana Leclerc</span>
+                </div>
+                <a href="https://www.youtube.com/@KevinPowell" target="_blank" class="creator-item">
+                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_mQczyuvnXgEq8fApoOXpG2Yw_JKYqRA7kVOhNFuHLz9Vc=s160-c-k-c0x00ffffff-no-rj">
+                    
+                    <span class="name">Kevin Powell</span>
+                    <span class="role">Esperto CSS</span>
+                </a>
+                <a href="https://www.youtube.com/@TraversyMedia" target="_blank" class="creator-item">
+                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_mLysKc36lc_FVk2j777olWvLOjgDz6NCNGdiQBnAKRENM=s160-c-k-c0x00ffffff-no-rj">
+                    <span class="name">Traversy Media</span>
+                    <span class="role">Guru Web Dev</span>
+                </a>
+                <a href="https://www.youtube.com/@TheNetNinja" target="_blank" class="creator-item">
+                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_mk2Ex-8sW03SBlBX7D1EC5skH0kv9rS3rU9IXq2I-q2Zg=s160-c-k-c0x00ffffff-no-rj">
+                    <span class="name">The Net Ninja</span>
+                    <span class="role">Maestro JavaScript</span>
+                </a>
+            </div>
+        </div>
+
+        <footer class="developer-footer">
+            Sviluppato con dedizione da:
+            <span class="dev-name">Cristopher</span>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('night-sky');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = Array.from({length: 100}, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                s: Math.random() * 2,
+                v: Math.random() > 0.98 ? Math.random() * 10 + 5 : 0
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "white";
+            stars.forEach(s => {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.s, 0, Math.PI*2);
+                ctx.fill();
+                if(s.v > 0) {
+                    s.x += s.v; s.y += s.v/2;
+                    if(s.x > canvas.width) s.x = -10;
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.onresize = init;
+        init();
+        draw();
+    </script>
+</body>
+</html>
+<img src="https://charlesleclerc.com/wp-content/uploads/2025/02/Leclerc-About-02-Official-Pic-1.jpg" alt="IL PREDESTINATO">
+
+

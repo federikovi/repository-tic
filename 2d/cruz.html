@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta Arcade - Michel Cruz Soto</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(270deg,#ff00cc,#3333ff,#00ffff,#ffcc00);
+    background-size: 800% 800%;
+    animation: fondoArcade 15s ease infinite;
+    color:white;
+}
+
+@keyframes fondoArcade{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+header{
+    text-align:center;
+    padding:30px;
+    background: rgba(0,0,0,0.7);
+    box-shadow:0 0 20px #00ffff;
+}
+
+h1{
+    font-size:22px;
+    color:#00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+}
+
+.subtitulo{
+    margin-top:15px;
+    font-size:10px;
+    color:#ffcc00;
+}
+
+.container{
+    width:85%;
+    margin:40px auto;
+}
+
+.card{
+    background: rgba(0,0,0,0.8);
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:15px;
+    box-shadow:0 0 15px #ff00ff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow:0 0 25px #00ffff;
+}
+
+.card h2{
+    font-size:12px;
+    color:#ffcc00;
+    margin-bottom:15px;
+    text-shadow:0 0 8px #ffcc00;
+}
+
+.card p{
+    font-size:10px;
+    line-height:1.8;
+}
+
+.info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.badge{
+    background:#111;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 0 10px #00ff99;
+    font-size:10px;
+    text-align:center;
+}
+
+/* GALERÍA ARCADE */
+
+.gallery{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.gallery img{
+    width:300px;
+    border-radius:15px;
+    border:4px solid #00ffff;
+    box-shadow:0 0 15px #ff00ff;
+    animation: flotar 4s ease-in-out infinite;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.gallery img:hover{
+    transform: scale(1.1) rotate(2deg);
+    box-shadow:0 0 30px #ffff00;
+}
+
+@keyframes flotar{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-15px);}
+    100%{transform: translateY(0px);}
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:black;
+    font-size:8px;
+    box-shadow:0 0 20px #ff00cc;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🗺 DAL LIDO AL BARBARIGO 🗺</h1>
+    <div class="subtitulo">Michel Cruz Soto</div>
+</header>
+
+<div class="container">
+
+<div class="card">
+    <h2>📍 Informazioni Generali</h2>
+    <div class="info">
+        <div class="badge">🚤 Battello + a piedi</div>
+        <div class="badge">⏱ 30 minuti</div>
+        <div class="badge">💷 7,50£</div>
+        <div class="badge">⭐ Facile</div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🖼 Lido di Venezia - Galleria</h2>
+    <div class="gallery">
+        <img src="https://imgs.search.brave.com/HLd9NMMl8uV8gaurggyCz3ufTZJpKBSaz2SwoOvvQlo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTA1/MDI1ODE2Ni9waG90/by9yb21hbnRpYy1z/dW5zZXQtb24tdGhl/LXZlbmljZS1sYWdv/b24taXNsYW5kLW9m/LXBlbGxlc3RyaW5h/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz10Yy1GZy1QalQ5/OVRTRzZldHJJTUl6/UW5uMDI5MU0tdkpj/MXROeDcwbDVnPQ" alt="Playa Lido">
+        <img src="https://imgs.search.brave.com/kXNNLzq_aOgI6O1ZTOIPP4W9fSoa2ywIvGgxb0tJfgM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dmlzaXRsaWRvLml0/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIy/LzA1L2N1b3JlLXZl/cmRlLXZlbmV6aWEt/MS03Njh4OTIwLmpw/Zw" alt="Hotel Lido">
+        <img src="https://imgs.search.brave.com/kfzTU5lAgUPrCXvKXJyYWEbTMMT3wwlgtvW2DuvsHMw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YWltLmV4cGVkaWEu/Y29tL2Rlc3RpbmF0/aW9uLzkvOGE2YjQ0/Y2I3MTY4ZjA5MmJj/Mzg3NzM4NjU1ZGRl/OGIuanBnP2ltcG9s/aWN5PWZjcm9wJnc9/OTAwJmg9NTA2JnE9/bWVkaXVtSGlnaA" alt="Vista Lido">
+    </div>
+</div>
+
+<div class="card">
+    <h2>🗺 Percorso</h2>
+    <p>
+     ▶ Partenza dal Lido di Venezia<br>
+    Prendi un vaporetto dalla fermata Lido (linea 1 o 5.1) in direzione Piazza San Marco.<br><br>
+
+    ▶ Scendi alla fermata "San Zaccaria"<br>
+    Dopo circa 25–30 minuti di viaggio, scendi alla fermata San Zaccaria, che è molto vicina a Piazza San Marco.<br><br>
+
+    ▶ Cammina verso Piazza San Marco<br>
+    Uscendo dalla fermata, attraversa il Ponte della Paglia e passeggia verso Piazza San Marco. Qui puoi ammirare la famosa Basilica di San Marco e il Campanile.<br><br>
+
+    ▶ Prosegui lungo la Calle Larga XXII Marzo<br>
+    Prendi la Calle Larga XXII Marzo, che ti porterà nella zona di Rialto. Questa è una delle vie principali di Venezia, famosa per i suoi negozi e ristoranti.<br><br>
+
+    ▶ Attraversa il Ponte di Rialto<br>
+    Una volta arrivato a Rialto, attraversa il celebre Ponte di Rialto, uno dei luoghi simbolo di Venezia. Qui troverai il mercato di Rialto, molto vivace durante la giornata.<br><br>
+
+    ▶ Prosegui lungo la Salizada San Giovanni Grisostomo<br>
+    Continua dritto lungo la Salizada San Giovanni Grisostomo, avvicinandoti alla zona di Cannaregio.<br><br>
+
+    ▶ Svolta in Fondamenta San Felice<br>
+    Gira a destra su Fondamenta San Felice e prosegui fino a Campo Santa Maria Formosa.<br><br>
+
+    ▶ Campo Santa Maria Formosa<br>
+    Attraversa il campo con la sua omonima chiesa, punto di transito importante.
+    </p>
+</div>
+
+</div>
+
+<footer>
+    © 2026 - MICHEL CRUZ SOTO ✨
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+	
+
