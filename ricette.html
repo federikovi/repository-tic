@@ -1477,12 +1477,24 @@ function applyFilters() {
     card.classList.toggle('hidden', !(catOk && classeOk));
   });
 
-  // mostra/nasconde i titoli di sezione in base alle card visibili
+  // mostra/nasconde grid, titoli e <br> di spaziatura in base alle card visibili
   document.querySelectorAll('.grid').forEach(grid => {
     const hasVisible = [...grid.querySelectorAll('.card')].some(c => !c.classList.contains('hidden'));
+    grid.classList.toggle('hidden', !hasVisible);
+
     const h2 = grid.previousElementSibling;
     if (h2 && h2.classList.contains('sezione-titolo')) {
       h2.classList.toggle('hidden', !hasVisible);
+      // nasconde anche i <br> di spaziatura prima dell'h2
+      let node = h2.previousSibling;
+      while (node) {
+        if (node.nodeType === 1 && node.tagName === 'BR') {
+          node.style.display = hasVisible ? '' : 'none';
+        } else if (node.nodeType !== 3) {
+          break;
+        }
+        node = node.previousSibling;
+      }
     }
   });
 }
