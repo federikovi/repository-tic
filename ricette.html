@@ -78,9 +78,41 @@ header h1 em {
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
-  padding: 30px 20px;
+  padding: 30px 20px 16px;
+  background-color: var(--surface);
+}
+
+.filtri-classe {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 20px 20px;
   background-color: var(--surface);
   border-bottom: 1px solid var(--surface-variant);
+}
+
+.filtro-classe-btn {
+  border: 1.5px solid var(--surface-variant);
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro-classe-btn:hover {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.filtro-classe-btn.active {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: white;
 }
 
 .filtro-btn {
@@ -267,6 +299,16 @@ footer strong {
   <button class="filtro-btn" onclick="filtra(event, 'dolce')">🍰 Dolci</button>
   <button class="filtro-btn" onclick="filtra(event, 'salato')">🍝 Salati</button>
   <button class="filtro-btn" onclick="filtra(event, 'guida')">🗺️ Guide</button>
+</div>
+<div class="filtri-classe">
+  <button class="filtro-classe-btn active" onclick="filtraClasse(event, 'tutte')">Tutte le classi</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2a')">2A</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2b')">2B</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2c')">2C</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2d')">2D</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2e')">2E</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2f')">2F</button>
+  <button class="filtro-classe-btn" onclick="filtraClasse(event, '2g')">2G</button>
 </div>
 
 <div class="sezione">
@@ -1419,19 +1461,44 @@ Progetti HTML & CSS · Classi Seconde · 2025/2026
 </footer>
 
 <script>
-function filtra(e, cat) {
-  document.querySelectorAll('.filtro-btn')
-    .forEach(btn => btn.classList.remove('active'));
+let activeCat = 'tutti';
+let activeClasse = 'tutte';
 
-  e.target.classList.add('active');
+function getCardClasse(card) {
+  const grid = card.closest('.grid');
+  if (!grid) return '';
+  return grid.id.replace('grid-', '').toLowerCase();
+}
 
+function applyFilters() {
   document.querySelectorAll('.card').forEach(card => {
-    if (cat === 'tutti' || card.dataset.cat === cat) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
+    const catOk = activeCat === 'tutti' || card.dataset.cat === activeCat;
+    const classeOk = activeClasse === 'tutte' || getCardClasse(card) === activeClasse;
+    card.classList.toggle('hidden', !(catOk && classeOk));
+  });
+
+  // mostra/nasconde i titoli di sezione in base alle card visibili
+  document.querySelectorAll('.grid').forEach(grid => {
+    const hasVisible = [...grid.querySelectorAll('.card')].some(c => !c.classList.contains('hidden'));
+    const h2 = grid.previousElementSibling;
+    if (h2 && h2.classList.contains('sezione-titolo')) {
+      h2.classList.toggle('hidden', !hasVisible);
     }
   });
+}
+
+function filtra(e, cat) {
+  document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+  e.target.classList.add('active');
+  activeCat = cat;
+  applyFilters();
+}
+
+function filtraClasse(e, classe) {
+  document.querySelectorAll('.filtro-classe-btn').forEach(btn => btn.classList.remove('active'));
+  e.target.classList.add('active');
+  activeClasse = classe;
+  applyFilters();
 }
 </script>
 
