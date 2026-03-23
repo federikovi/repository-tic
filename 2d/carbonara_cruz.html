@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>La Vera Carbonara</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#fff7ed,#ffe8cc);
+color:#333;
+}
+
+/* HERO */
+
+.hero{
+height:80vh;
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/3/33/Espaguetis_carbonara.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
+
+.hero-overlay{
+background:rgba(0,0,0,0.45);
+padding:60px;
+border-radius:20px;
+backdrop-filter:blur(6px);
+}
+
+.hero h1{
+font-size:55px;
+}
+
+.hero p{
+margin-top:10px;
+font-size:20px;
+}
+
+/* NAV */
+
+nav{
+position:sticky;
+top:0;
+background:white;
+padding:15px;
+display:flex;
+justify-content:center;
+gap:30px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+nav a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#ff7a00;
+}
+
+/* SECTIONS */
+
+section{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
+text-align:center;
+}
+
+h2{
+font-size:36px;
+margin-bottom:30px;
+}
+
+/* CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* RICETTA */
+
+.steps{
+text-align:left;
+max-width:600px;
+margin:auto;
+line-height:1.8;
+}
+
+/* VIDEO */
+
+.video-container{
+margin-top:40px;
+display:flex;
+justify-content:center;
+}
+
+iframe{
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* BUTTON */
+
+button{
+margin-top:20px;
+padding:14px 25px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,#ff7a00,#ffb347);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* FOOTER */
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<div class="hero-overlay">
+<h1>🍝 La Vera Carbonara</h1>
+<p>Ricetta tradizionale romana</p>
+</div>
+</div>
+
+<nav>
+<a href="#storia">Storia</a>
+<a href="#ingredienti">Ingredienti</a>
+<a href="#ricetta">Ricetta</a>
+<a href="#video">Video</a>
+</nav>
+
+<section id="storia">
+
+<h2>📜 La storia</h2>
+
+<p>
+La Pasta alla Carbonara è uno dei piatti più famosi della cucina romana. La sua origine non è completamente certa: secondo una teoria nasce tra i lavoratori dei boschi chiamati carbonai, che cucinavano pasta con uova, formaggio e Guanciale perché erano ingredienti facili da conservare. Un’altra teoria dice che la ricetta sia nata dopo la World War II, quando a Rome i cuochi italiani unirono la pasta con uova e bacon portati dai soldati americani. Oggi la carbonara è preparata tradizionalmente con spaghetti, uova, guanciale, Pecorino Romano e pepe nero, senza panna. 🍝
+</p>
+
+</section>
+
+<section id="ingredienti">
+
+<h2>🧾 Ingredienti (per 2 persone)</h2>
+
+<div class="cards">
+
+<div class="card">🍝 200 g di spaghetti</div>
+<div class="card">🥓 100 g di guanciale</div>
+<div class="card">🥚 2 uova + 1 tuorlo</div>
+<div class="card">🧀 50 g di pecorino romano</div>
+<div class="card">⚫ Pepe nero q.b.</div>
+<div class="card">🧂 Sale per l'acqua della pasta</div>
+
+</div>
+
+<button onclick="segreto()">Scopri il segreto dello chef 👨‍🍳</button>
+
+<p id="msg"></p>
+
+</section>
+
+<section id="ricetta">
+
+<h2>👨‍🍳 Preparazione</h2>
+
+<div class="steps">
+<ol>
+<li>Porta a ebollizione una pentola con acqua salata.</li>
+<li>Cuoci gli spaghetti.</li>
+<li>Taglia il guanciale e fallo rosolare fino a renderlo croccante.</li>
+<li>Mescola in una ciotola uova, pecorino e pepe.</li>
+<li>Scola la pasta e uniscila al guanciale.</li>
+<li>A fuoco spento aggiungi la crema di uova.</li>
+<li>Mescola velocemente per ottenere una crema.</li>
+</ol>
+</div>
+
+</section>
+
+<section id="video">
+
+<h2>🎬 Video Tutorial</h2>
+
+<div class="video-container">
+
+<iframe width="700" height="400"
+src="https://www.youtube.com/embed/3AAdKl1UYZs"
+title="Tutorial Carbonara"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>🍝 Sito dedicato alla pasta alla carbonara</p>
+<p>Cucina italiana 🇮🇹</p>
+
+</footer>
+
+<script>
+
+function segreto(){
+document.getElementById("msg").innerHTML=
+"Il segreto è aggiungere le uova a fuoco spento per creare una crema perfetta!";
+}
+
+</script>
+
+</body>
+</html>
+
