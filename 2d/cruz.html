@@ -1,202 +1,296 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ruta Arcade - Michel Cruz Soto</title>
+<title>Itinerario Venezia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
     margin:0;
-    font-family: 'Press Start 2P', cursive;
-    background: linear-gradient(270deg,#ff00cc,#3333ff,#00ffff,#ffcc00);
-    background-size: 800% 800%;
-    animation: fondoArcade 15s ease infinite;
-    color:white;
+    padding:0;
+    box-sizing:border-box;
 }
 
-@keyframes fondoArcade{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5f1e6;
+    color:#4e4035;
 }
+
+/* ================= HEADER PREMIUM ================= */
 
 header{
+    height:65vh;
+    min-height:480px;
+    background-image:url("https://images.unsplash.com/photo-1523906834658-6e24ef2386f9");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    padding:30px;
-    background: rgba(0,0,0,0.7);
-    box-shadow:0 0 20px #00ffff;
+    color:white;
+    position:relative;
+    padding:40px 20px;
 }
 
-h1{
-    font-size:22px;
-    color:#00ffff;
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+header::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(245,241,230,0.9));
 }
 
-.subtitulo{
-    margin-top:15px;
-    font-size:10px;
-    color:#ffcc00;
+.header-content{
+    position:relative;
+    z-index:2;
+    animation:fadeDown 1.5s ease;
+}
+
+header h1{
+    font-size:48px;
+    letter-spacing:2px;
+}
+
+header p{
+    font-weight:300;
+    margin-top:10px;
+}
+
+@keyframes fadeDown{
+    from{opacity:0; transform:translateY(-30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= INFO CARDS ================= */
+
+.info-container{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:-30px;
+    padding:40px 20px;
+}
+
+.info-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    width:180px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    transition:0.4s;
+}
+
+.info-card:hover{
+    transform:translateY(-8px) scale(1.05);
+}
+
+.info-card span{
+    font-size:35px;
+    display:block;
+}
+
+/* ================= TIMELINE ================= */
+
+.timeline{
+    position:relative;
+    max-width:1000px;
+    margin:60px auto;
+    padding:20px 0;
+}
+
+.timeline::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:4px;
+    height:100%;
+    background:#d2b48c;
 }
 
 .container{
-    width:85%;
-    margin:40px auto;
+    position:relative;
+    width:45%;
+    padding:20px;
+    opacity:0;
+    transition:all 0.8s ease;
 }
 
-.card{
-    background: rgba(0,0,0,0.8);
+.container.left{
+    left:0;
+    transform:translateX(-60px);
+    text-align:right;
+}
+
+.container.right{
+    left:55%;
+    transform:translateX(60px);
+    text-align:left;
+}
+
+.container::before{
+    content:'📍';
+    position:absolute;
+    top:25px;
+    background:white;
+    border-radius:50%;
+    padding:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.container.left::before{ right:-40px; }
+.container.right::before{ left:-40px; }
+
+.content{
+    background:white;
     padding:25px;
-    margin-bottom:25px;
-    border-radius:15px;
-    box-shadow:0 0 15px #ff00ff;
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius:18px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.12);
+    transition:0.3s;
 }
 
-.card:hover{
-    transform: scale(1.05);
-    box-shadow:0 0 25px #00ffff;
+.content:hover{
+    transform:scale(1.03);
 }
 
-.card h2{
-    font-size:12px;
-    color:#ffcc00;
-    margin-bottom:15px;
-    text-shadow:0 0 8px #ffcc00;
+.content h3{
+    color:#a67c52;
+    margin-bottom:10px;
 }
 
-.card p{
-    font-size:10px;
-    line-height:1.8;
+.show{
+    opacity:1;
+    transform:translateX(0);
 }
 
-.info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-.badge{
-    background:#111;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 0 10px #00ff99;
-    font-size:10px;
-    text-align:center;
-}
-
-/* GALERÍA ARCADE */
-
-.gallery{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.gallery img{
-    width:300px;
-    border-radius:15px;
-    border:4px solid #00ffff;
-    box-shadow:0 0 15px #ff00ff;
-    animation: flotar 4s ease-in-out infinite;
-    transition: transform 0.4s, box-shadow 0.4s;
-}
-
-.gallery img:hover{
-    transform: scale(1.1) rotate(2deg);
-    box-shadow:0 0 30px #ffff00;
-}
-
-@keyframes flotar{
-    0%{transform: translateY(0px);}
-    50%{transform: translateY(-15px);}
-    100%{transform: translateY(0px);}
-}
+/* ================= FOOTER ================= */
 
 footer{
     text-align:center;
-    padding:20px;
-    background:black;
-    font-size:8px;
-    box-shadow:0 0 20px #ff00cc;
+    padding:30px;
+    background:#e8dcc8;
+    margin-top:80px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media screen and (max-width:900px){
+
+    .timeline::before{
+        left:20px;
+    }
+
+    .container{
+        width:100%;
+        padding-left:70px;
+        margin-bottom:40px;
+        transform:translateY(50px);
+    }
+
+    .container.left,
+    .container.right{
+        left:0;
+        text-align:left;
+    }
+
+    .container::before{
+        left:0;
+    }
+
+    .show{
+        transform:translateY(0);
+    }
 }
 
 </style>
 </head>
+
 <body>
 
 <header>
-    <h1>🗺 DAL LIDO AL BARBARIGO 🗺</h1>
-    <div class="subtitulo">Michel Cruz Soto</div>
+    <div class="header-content">
+        <h1>Itinerario Venezia</h1>
+        <p>Un viaggio elegante tra acqua e storia</p>
+    </div>
 </header>
 
-<div class="container">
-
-<div class="card">
-    <h2>📍 Informazioni Generali</h2>
-    <div class="info">
-        <div class="badge">🚤 Battello + a piedi</div>
-        <div class="badge">⏱ 30 minuti</div>
-        <div class="badge">💷 7,50£</div>
-        <div class="badge">⭐ Facile</div>
-    </div>
+<div class="info-container">
+    <div class="info-card"><span>🚤</span>Battello + a piedi</div>
+    <div class="info-card"><span>⏱</span>30 minuti</div>
+    <div class="info-card"><span>💷</span>7,50£</div>
+    <div class="info-card"><span>⭐</span>Facile</div>
 </div>
 
-<div class="card">
-    <h2>🖼 Lido di Venezia - Galleria</h2>
-    <div class="gallery">
-        <img src="https://imgs.search.brave.com/HLd9NMMl8uV8gaurggyCz3ufTZJpKBSaz2SwoOvvQlo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTA1/MDI1ODE2Ni9waG90/by9yb21hbnRpYy1z/dW5zZXQtb24tdGhl/LXZlbmljZS1sYWdv/b24taXNsYW5kLW9m/LXBlbGxlc3RyaW5h/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz10Yy1GZy1QalQ5/OVRTRzZldHJJTUl6/UW5uMDI5MU0tdkpj/MXROeDcwbDVnPQ" alt="Playa Lido">
-        <img src="https://imgs.search.brave.com/kXNNLzq_aOgI6O1ZTOIPP4W9fSoa2ywIvGgxb0tJfgM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dmlzaXRsaWRvLml0/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIy/LzA1L2N1b3JlLXZl/cmRlLXZlbmV6aWEt/MS03Njh4OTIwLmpw/Zw" alt="Hotel Lido">
-        <img src="https://imgs.search.brave.com/kfzTU5lAgUPrCXvKXJyYWEbTMMT3wwlgtvW2DuvsHMw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YWltLmV4cGVkaWEu/Y29tL2Rlc3RpbmF0/aW9uLzkvOGE2YjQ0/Y2I3MTY4ZjA5MmJj/Mzg3NzM4NjU1ZGRl/OGIuanBnP2ltcG9s/aWN5PWZjcm9wJnc9/OTAwJmg9NTA2JnE9/bWVkaXVtSGlnaA" alt="Vista Lido">
-    </div>
-</div>
+<section class="timeline">
 
-<div class="card">
-    <h2>🗺 Percorso</h2>
-    <p>
-     ▶ Partenza dal Lido di Venezia<br>
-    Prendi un vaporetto dalla fermata Lido (linea 1 o 5.1) in direzione Piazza San Marco.<br><br>
+<div class="container left"><div class="content">
+<h3>Partenza dal Lido di Venezia</h3>
+<p>Prendi il vaporetto linea 1 o 5.1 verso Piazza San Marco.</p>
+</div></div>
 
-    ▶ Scendi alla fermata "San Zaccaria"<br>
-    Dopo circa 25–30 minuti di viaggio, scendi alla fermata San Zaccaria, che è molto vicina a Piazza San Marco.<br><br>
+<div class="container right"><div class="content">
+<h3>Fermata San Zaccaria</h3>
+<p>Scendi dopo circa 25–30 minuti.</p>
+</div></div>
 
-    ▶ Cammina verso Piazza San Marco<br>
-    Uscendo dalla fermata, attraversa il Ponte della Paglia e passeggia verso Piazza San Marco. Qui puoi ammirare la famosa Basilica di San Marco e il Campanile.<br><br>
+<div class="container left"><div class="content">
+<h3>Piazza San Marco</h3>
+<p>Ammira la Basilica e il Campanile.</p>
+</div></div>
 
-    ▶ Prosegui lungo la Calle Larga XXII Marzo<br>
-    Prendi la Calle Larga XXII Marzo, che ti porterà nella zona di Rialto. Questa è una delle vie principali di Venezia, famosa per i suoi negozi e ristoranti.<br><br>
+<div class="container right"><div class="content">
+<h3>Calle Larga XXII Marzo</h3>
+<p>Zona famosa per negozi e ristoranti.</p>
+</div></div>
 
-    ▶ Attraversa il Ponte di Rialto<br>
-    Una volta arrivato a Rialto, attraversa il celebre Ponte di Rialto, uno dei luoghi simbolo di Venezia. Qui troverai il mercato di Rialto, molto vivace durante la giornata.<br><br>
+<div class="container left"><div class="content">
+<h3>Ponte di Rialto</h3>
+<p>Attraversa il ponte e visita il mercato.</p>
+</div></div>
 
-    ▶ Prosegui lungo la Salizada San Giovanni Grisostomo<br>
-    Continua dritto lungo la Salizada San Giovanni Grisostomo, avvicinandoti alla zona di Cannaregio.<br><br>
+<div class="container right"><div class="content">
+<h3>Salizada San Giovanni Grisostomo</h3>
+<p>Prosegui verso Cannaregio.</p>
+</div></div>
 
-    ▶ Svolta in Fondamenta San Felice<br>
-    Gira a destra su Fondamenta San Felice e prosegui fino a Campo Santa Maria Formosa.<br><br>
+<div class="container left"><div class="content">
+<h3>Fondamenta San Felice</h3>
+<p>Svolta verso Campo Santa Maria Formosa.</p>
+</div></div>
 
-    ▶ Campo Santa Maria Formosa<br>
-    Attraversa il campo con la sua omonima chiesa, punto di transito importante.
-    </p>
-</div>
+<div class="container right"><div class="content">
+<h3>Campo Santa Maria Formosa</h3>
+<p>Attraversa il campo con la sua chiesa.</p>
+</div></div>
 
-</div>
+</section>
 
 <footer>
-    © 2026 - MICHEL CRUZ SOTO ✨
+Lavoro di Informatica • Itinerario Premium Venezia
 </footer>
+
+<script>
+const containers = document.querySelectorAll('.container');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+},{ threshold:0.2 });
+
+containers.forEach(container => observer.observe(container));
+</script>
 
 </body>
 </html>
-
-
-
-
-
-	
 
