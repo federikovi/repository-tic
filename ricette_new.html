@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Glow Up — Kit Completo</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: #1a1008;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 14mm 16mm;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 3px solid #e8622a;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .title-block {}
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e8622a;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1a1008;
+    line-height: 1;
+  }
+  h1 span { color: #e8622a; }
+  .subtitle {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+    font-weight: 300;
+  }
+  .badge {
+    background: #1a1008;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+
+  /* TWO COLUMN LAYOUT */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  /* SECTION CARDS */
+  .card {
+    border: 1.5px solid #e8d5c8;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: #e8622a;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-header.dark { background: #1a1008; }
+  .card-header.warm { background: #fff3ee; color: #e8622a; border-bottom: 1.5px solid #e8d5c8; }
+  .card-body { padding: 10px 12px; background: #fff; }
+
+  /* CHECKLIST */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px dashed #f0e0d8;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 2px solid #e8622a;
+    border-radius: 2px;
+    margin-top: 1px;
+  }
+  .check-label { color: #1a1008; font-weight: 500; }
+  .check-sub { color: #888; font-size: 10px; font-weight: 300; display: block; margin-top: 1px; }
+
+  /* VOCABULARY GRID */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .vocab-item {
+    background: #fff8f5;
+    border-left: 3px solid #e8622a;
+    padding: 5px 8px;
+    border-radius: 0 2px 2px 0;
+  }
+  .vocab-term {
+    font-size: 10px;
+    font-weight: 600;
+    color: #e8622a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .vocab-def {
+    font-size: 9.5px;
+    color: #555;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-top: 1px;
+  }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 6px; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 11px;
+  }
+  .step-num {
+    background: #e8622a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .step-text { line-height: 1.4; color: #333; }
+  .step-text strong { color: #1a1008; }
+
+  /* AUTOVALUTAZIONE */
+  .self-check {
+    background: #fff8f5;
+    border: 1.5px solid #e8622a;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .self-check-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #e8622a;
+    margin-bottom: 8px;
+  }
+  .self-check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+  .self-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .self-question {
+    font-size: 10px;
+    color: #333;
+    line-height: 1.3;
+    font-weight: 400;
+  }
+  .self-yn {
+    display: flex;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #e8622a;
+  }
+
+  /* CONSEGNA BOX */
+  .consegna {
+    background: #1a1008;
+    color: #fff;
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .consegna-title {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #e8622a;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .consegna-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+  .cs {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+    padding: 7px 6px;
+    text-align: center;
+  }
+  .cs-num { font-size: 16px; font-weight: 700; color: #e8622a; line-height: 1; }
+  .cs-label { font-size: 8.5px; color: #ccc; margin-top: 3px; line-height: 1.3; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid #e8d5c8;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    color: #aaa;
+  }
+
+  /* FULL WIDTH CARD */
+  .full-card { margin-bottom: 14px; }
+
+  @media print {
+    body { margin: 0; padding: 14mm 16mm; }
+    @page { size: A4; margin: 0; }
+  }
+
+
+/* ── GLOWUP KIT STYLES ── */
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #e8622a;
+    --dark: #1a1008;
+    --light: #fff8f5;
+    --mid: #ffe0d0;
+    --border: #e8d5c8;
+    --gray: #888;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: var(--dark);
+  }
+
+  /* PAGE */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 14mm 16mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--orange);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  h1 span { color: var(--orange); }
+  .subtitle { font-size: 11px; color: var(--gray); margin-top: 3px; }
+  .badge {
+    background: var(--dark);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+  .badge.orange { background: var(--orange); }
+
+  /* SECTION TITLE */
+  .sec-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    margin-top: 14px;
+  }
+
+  /* RUBRICA TABLE */
+  .rubrica {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    margin-bottom: 14px;
+  }
+  .rubrica th {
+    background: var(--dark);
+    color: #fff;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+  .rubrica th.score {
+    background: var(--orange);
+    text-align: center;
+    width: 52px;
+  }
+  .rubrica td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .rubrica td.score {
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--orange);
+    border-left: 2px solid var(--border);
+  }
+  .rubrica tr:nth-child(even) td { background: var(--light); }
+  .rubrica tr:hover td { background: #fff3ee; }
+  .rubrica .cat {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 10px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .rubrica .desc { color: #555; font-size: 9.5px; }
+
+  /* TOTAL ROW */
+  .total-row td {
+    background: var(--dark) !important;
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 8px;
+  }
+  .total-row td.score {
+    color: var(--orange);
+    font-size: 16px;
+    border-left: 2px solid rgba(255,255,255,0.2);
+  }
+
+  /* LIVELLI BOX */
+  .livelli {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .livello {
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+  }
+  .livello-header {
+    padding: 5px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .livello-body {
+    padding: 6px 8px;
+    font-size: 9.5px;
+    line-height: 1.4;
+    color: #444;
+    background: #fff;
+  }
+  .l1 .livello-header { background: #ffebee; color: #c62828; }
+  .l2 .livello-header { background: #fff8e1; color: #f57f17; }
+  .l3 .livello-header { background: #e8f5e9; color: #2e7d32; }
+  .l4 .livello-header { background: #e3f2fd; color: #1565c0; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 12px 0;
+  }
+
+  /* CANVA STEPS */
+  .canva-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .canva-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--light);
+    border-left: 3px solid var(--orange);
+    padding: 10px 12px;
+    border-radius: 0 4px 4px 0;
+  }
+  .step-num {
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .step-content {}
+  .step-title { font-weight: 600; font-size: 11px; color: var(--dark); margin-bottom: 2px; }
+  .step-desc { font-size: 10px; color: #555; line-height: 1.4; }
+  .step-tip {
+    display: inline-block;
+    background: var(--mid);
+    color: var(--orange);
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-top: 4px;
+  }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+  /* INFO BOX */
+  .info-box {
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .info-box-header {
+    background: var(--orange);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 10px;
+  }
+  .info-box-header.dark { background: var(--dark); }
+  .info-box-body { padding: 10px; background: #fff; }
+  .info-item {
+    display: flex;
+    gap: 6px;
+    font-size: 10px;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--border);
+    line-height: 1.4;
+  }
+  .info-item:last-child { border-bottom: none; }
+  .info-dot { color: var(--orange); font-weight: 700; min-width: 10px; }
+
+  /* ARTBOARD PREVIEW */
+  .artboards { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; margin-bottom: 12px; }
+  .artboard {
+    border: 2px dashed var(--border);
+    border-radius: 4px;
+    padding: 8px;
+    background: var(--light);
+  }
+  .artboard-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .ab-section {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 4px 6px;
+    font-size: 9px;
+    color: #666;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .ab-section.highlight { background: var(--orange); color: #fff; font-weight: 600; }
+
+  /* PROMPT TEMPLATE */
+  .prompt-box {
+    background: var(--dark);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .prompt-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .prompt-line {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .prompt-key {
+    color: #aaa;
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 110px;
+    padding-top: 2px;
+    font-style: italic;
+  }
+  .prompt-val {
+    color: #fff;
+    font-size: 10px;
+    line-height: 1.5;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 4px 8px;
+    flex: 1;
+  }
+  .prompt-val.blank {
+    color: rgba(255,255,255,0.3);
+    border-style: dashed;
+  }
+
+  /* ITERATION BOXES */
+  .iter-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .iter-box {
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .iter-header {
+    background: var(--light);
+    border-bottom: 1.5px solid var(--border);
+    padding: 6px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .iter-body { padding: 8px; font-size: 9.5px; color: #444; line-height: 1.5; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+  .tip {
+    background: var(--light);
+    border-left: 3px solid var(--orange);
+    padding: 7px 10px;
+    font-size: 10px;
+    line-height: 1.4;
+    border-radius: 0 3px 3px 0;
+  }
+  .tip strong { color: var(--orange); display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    color: #aaa;
+    margin-top: 16px;
+  }
+  .footer span.hi { color: var(--orange); font-weight: 600; }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; padding: 14mm 16mm; }
+    @page { size: A4; margin: 0; }
+  }
+
+
+/* ── DOSSIER EXTRA STYLES ── */
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #e8622a;
+    --dark: #1a1008;
+    --light: #fff8f5;
+    --mid: #ffe0d0;
+    --border: #e8d5c8;
+    --gray: #888;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: var(--dark);
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 14mm 16mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--orange);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  h1 span { color: var(--orange); }
+  .subtitle { font-size: 11px; color: var(--gray); margin-top: 3px; }
+  .badge {
+    background: var(--dark);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+  .badge.orange { background: var(--orange); }
+
+  .sec-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    margin-top: 14px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 12px 0;
+  }
+
+  /* DOSSIER STRUCTURE */
+  .dossier-box {
+    background: var(--dark);
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .dossier-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .dossier-section {
+    margin-bottom: 12px;
+  }
+  .dossier-section-title {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dossier-num {
+    background: var(--orange);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+  }
+  .dossier-item {
+    display: flex;
+    gap: 8px;
+    font-size: 10px;
+    color: #ccc;
+    padding: 4px 0 4px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    line-height: 1.4;
+  }
+  .dossier-item:last-child { border-bottom: none; }
+  .dossier-dot { color: var(--orange); }
+  .dossier-sub { color: rgba(255,255,255,0.35); font-size: 9px; display: block; }
+
+  /* TODAY BOX */
+  .today-box {
+    background: var(--orange);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .today-icon { font-size: 28px; line-height: 1; }
+  .today-content {}
+  .today-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+  }
+  .today-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .today-items { display: flex; flex-direction: column; gap: 3px; }
+  .today-item { font-size: 10px; color: rgba(255,255,255,0.9); display: flex; gap: 6px; }
+  .today-item::before { content: "→"; font-weight: 700; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--light);
+    border-left: 3px solid var(--orange);
+    padding: 9px 12px;
+    border-radius: 0 4px 4px 0;
+  }
+  .step-num {
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .step-title { font-weight: 600; font-size: 11px; color: var(--dark); }
+  .step-desc { font-size: 10px; color: #555; line-height: 1.4; margin-top: 2px; }
+  .step-when {
+    display: inline-block;
+    background: var(--mid);
+    color: var(--orange);
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* CHECKLIST */
+  .checklist { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+  .check-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 7px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    font-size: 10.5px;
+    line-height: 1.4;
+  }
+  .check-box {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 2px solid var(--orange);
+    border-radius: 2px;
+    margin-top: 1px;
+  }
+  .check-label { font-weight: 500; }
+  .check-sub { color: var(--gray); font-size: 9.5px; font-weight: 300; display: block; margin-top: 1px; }
+
+  /* PROMPT INTRO */
+  .prompt-intro {
+    background: var(--dark);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .prompt-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .prompt-line {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 7px;
+    align-items: flex-start;
+  }
+  .prompt-key {
+    color: #aaa;
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 120px;
+    padding-top: 5px;
+    font-style: italic;
+  }
+  .prompt-val {
+    color: #fff;
+    font-size: 10px;
+    line-height: 1.5;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 4px 8px;
+    flex: 1;
+  }
+  .prompt-val.blank {
+    color: rgba(255,255,255,0.3);
+    border-style: dashed;
+  }
+
+  /* CHAIN STEPS */
+  .chain { display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; gap: 0; align-items: center; margin-bottom: 14px; }
+  .chain-box {
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+  }
+  .chain-icon { font-size: 22px; margin-bottom: 4px; }
+  .chain-title { font-size: 10px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+  .chain-desc { font-size: 9px; color: #666; line-height: 1.4; }
+  .chain-arrow { text-align: center; font-size: 18px; color: var(--orange); font-weight: 700; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .info-box { border: 1.5px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .info-box-header {
+    background: var(--orange);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 10px;
+  }
+  .info-box-header.dark { background: var(--dark); }
+  .info-box-body { padding: 10px; }
+  .info-item { display: flex; gap: 6px; font-size: 10px; padding: 4px 0; border-bottom: 1px dashed var(--border); line-height: 1.4; }
+  .info-item:last-child { border-bottom: none; }
+  .info-dot { color: var(--orange); font-weight: 700; min-width: 10px; }
+
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    color: #aaa;
+    margin-top: auto;
+  }
+  .footer span.hi { color: var(--orange); font-weight: 600; }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; padding: 14mm 16mm; }
+    @page { size: A4; margin: 0; }
+  }
+
+
+/* MERGE FIXES */
+.wf-page {
+  page-break-after: always;
+}
+</style>
+</head>
+<body>
+<div class="page wf-page"><!-- HEADER -->
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">IPSSEOA Barbarigo · TIC · a.s. 2024–25</div>
+    <h1>Recipe <span>Glow Up</span></h1>
+    <div class="subtitle">Guida alla prototipazione — Versione 2.0 della tua pagina ricetta</div>
+  </div>
+  <div class="badge">Wireframe</div>
+</div>
+
+<!-- AUTOVALUTAZIONE -->
+<div class="self-check">
+  <div class="self-check-title">✦ Autovalutazione — controlla il tuo wireframe prima di consegnarlo</div>
+  <div class="self-check-grid">
+    <div class="self-item">
+      <div class="self-question">Ci sono almeno 3 sezioni riconoscibili?<br><span style="color:#aaa;font-size:9px">(header / corpo / footer)</span></div>
+      <div class="self-yn"><span>☐ Sì</span><span>☐ No</span></div>
+    </div>
+    <div class="self-item">
+      <div class="self-question">C'è almeno 1 interazione descritta?<br><span style="color:#aaa;font-size:9px">(click, scroll, hover, tap)</span></div>
+      <div class="self-yn"><span>☐ Sì</span><span>☐ No</span></div>
+    </div>
+    <div class="self-item">
+      <div class="self-question">Si capisce dove trovare ingredienti e procedimento?</div>
+      <div class="self-yn"><span>☐ Sì</span><span>☐ No</span></div>
+    </div>
+    <div class="self-item">
+      <div class="self-question">Hai pensato a come funziona su telefono?</div>
+      <div class="self-yn"><span>☐ Sì</span><span>☐ In parte</span></div>
+    </div>
+    <div class="self-item">
+      <div class="self-question">Il tuo elemento creativo è spiegato chiaramente?</div>
+      <div class="self-yn"><span>☐ Sì</span><span>☐ Da chiarire</span></div>
+    </div>
+    <div class="self-item">
+      <div class="self-question">Hai scritto cosa succede quando l'utente interagisce?</div>
+      <div class="self-yn"><span>☐ Sì</span><span>☐ No</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TWO COL: ELEMENTI MINIMI + VOCABOLARIO -->
+<div class="two-col">
+
+  <div class="card">
+    <div class="card-header">⬡ Elementi minimi richiesti</div>
+    <div class="card-body">
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-label">Header</span>
+        <span class="check-sub">titolo, nome ricetta, immagine o elemento visivo principale</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-label">Sezione ingredienti</span>
+        <span class="check-sub">anche reinterpretata in modo creativo</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-label">Sezione procedimento</span>
+        <span class="check-sub">anche non lineare, anche nascosta dietro un click</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-label">Footer</span>
+        <span class="check-sub">anche minimo — classe, nome, anno</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-label">Almeno 1 interazione</span>
+        <span class="check-sub">descrivi cosa fa l'utente e cosa succede</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><span class="check-label">1 elemento creativo</span>
+        <span class="check-sub">l'idea che rende la tua pagina unica</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header dark">◈ Vocabolario da usare</div>
+    <div class="card-body">
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-term">Header</div>
+          <div class="vocab-def">La parte in cima alla pagina</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Footer</div>
+          <div class="vocab-def">La parte in fondo alla pagina</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Scroll</div>
+          <div class="vocab-def">Scorrere la pagina verso il basso</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Hover</div>
+          <div class="vocab-def">Il mouse passa sopra un elemento</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Tap / Click</div>
+          <div class="vocab-def">Tocco su mobile / click su desktop</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Transizione</div>
+          <div class="vocab-def">Animazione tra uno stato e l'altro</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Icona</div>
+          <div class="vocab-def">Simbolo grafico cliccabile</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Bottone</div>
+          <div class="vocab-def">Elemento che attiva un'azione</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Layout</div>
+          <div class="vocab-def">Come gli elementi sono disposti</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-term">Mobile-first</div>
+          <div class="vocab-def">Progettare prima per il telefono</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NEXT STEPS CONSEGNA -->
+<div class="consegna">
+  <div class="consegna-title">◈ Il percorso completo — cosa consegnerai alla fine</div>
+  <div class="consegna-steps">
+    <div class="cs">
+      <div class="cs-num">1</div>
+      <div class="cs-label">Screenshot sito HTML originale</div>
+    </div>
+    <div class="cs">
+      <div class="cs-num">2</div>
+      <div class="cs-label">Foto del wireframe cartaceo</div>
+    </div>
+    <div class="cs">
+      <div class="cs-num">3</div>
+      <div class="cs-label">Descrizione testuale dell'idea</div>
+    </div>
+    <div class="cs">
+      <div class="cs-num">4</div>
+      <div class="cs-label">Progetto Canva mobile + desktop</div>
+    </div>
+    <div class="cs">
+      <div class="cs-num">5</div>
+      <div class="cs-label">Prompt AI + risultato finale</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT STEPS LEZIONE -->
+<div class="full-card card">
+  <div class="card-header warm">→ Prossimi passi in classe</div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Oggi</strong> — Disegna il wireframe su carta. Usa frecce e note per spiegare le interazioni. Non serve essere artisti.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Prossima lezione</strong> — Porti il wireframe su Canva. Due artboard: telefono e desktop. Descrivi ogni elemento come se lo spiegassi a qualcuno che non ti vede.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Sessione AI</strong> — Usi la descrizione di Canva per fare un prompt a un'AI. L'AI costruisce la pagina. Se non viene come vuoi, cambi il prompt e riprovi.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>IPSSEOA Andrea Barbarigo · Venezia · TIC</span>
+  <span style="color:#e8622a;font-weight:600">Recipe Glow Up — Versione 2.0</span>
+  <span>a.s. 2024–25</span>
+</div></div>
+
+<!-- ═══════════════════════════
+     PAGINA 1 — IL DOSSIER
+═══════════════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">IPSSEOA Barbarigo · TIC · a.s. 2025–26</div>
+      <h1>Recipe <span>Glow Up</span></h1>
+      <div class="subtitle">Il dossier del progetto — cosa consegnerai alla fine</div>
+    </div>
+    <div class="badge">Dossier</div>
+  </div>
+
+  <!-- OGGI -->
+  <div class="today-box">
+    <div class="today-icon">📄</div>
+    <div class="today-content">
+      <div class="today-label">Cosa fai oggi</div>
+      <div class="today-title">Crei il documento base del tuo dossier</div>
+      <div class="today-items">
+        <div class="today-item">Apri Word o Google Doc</div>
+        <div class="today-item">Aggiungi l'intestazione con nome, classe, ricetta e anno scolastico</div>
+        <div class="today-item">Inserisci il sommario con i titoli delle sezioni</div>
+        <div class="today-item">Completa la Sezione 1 — Versione 1 con screenshot e commento</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRUTTURA DOSSIER -->
+  <div class="sec-title">◈ Struttura del documento</div>
+  <div class="dossier-box">
+    <div class="dossier-title">◈ Struttura obbligatoria del dossier</div>
+
+    <div style="background:rgba(255,255,255,0.05);border-radius:4px;padding:10px 12px;margin-bottom:12px;font-size:10px;color:#ccc;line-height:1.8">
+      <span style="color:var(--orange);font-weight:700">INTESTAZIONE</span><br>
+      Nome e Cognome &nbsp;·&nbsp; Classe &nbsp;·&nbsp; Ricetta &nbsp;·&nbsp; a.s. 2025–26
+      <br><br>
+      <span style="color:var(--orange);font-weight:700">SOMMARIO</span><br>
+      1. Versione 1<br>
+      2. Versione 2.0
+    </div>
+
+    <div class="dossier-section">
+      <div class="dossier-section-title">
+        <div class="dossier-num">1</div>
+        VERSIONE 1
+      </div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Screenshot del sito HTML attuale<span class="dossier-sub">immagine chiara, pagina intera se possibile</span></span></div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Breve commento — cosa funziona, cosa vorresti migliorare<span class="dossier-sub">3–5 frasi scritte da te, non dall'AI</span></span></div>
+    </div>
+
+    <div class="dossier-section" style="margin-bottom:0">
+      <div class="dossier-section-title">
+        <div class="dossier-num">2</div>
+        VERSIONE 2.0
+      </div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Foto del wireframe cartaceo<span class="dossier-sub">aggiunto dopo la lezione di oggi</span></span></div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Descrizione testuale dell'idea<span class="dossier-sub">cosa cambia, qual è l'elemento creativo, come si muove l'utente</span></span></div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Progetto Canva<span class="dossier-sub">screenshot o export del mockup — lezione successiva</span></span></div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Prompt AI e iterazioni<span class="dossier-sub">screenshot di ogni tentativo con l'AI</span></span></div>
+      <div class="dossier-item"><span class="dossier-dot">→</span><span>Risultato finale<span class="dossier-sub">screenshot o link alla pagina completata</span></span></div>
+    </div>
+  </div>
+
+  <div class="sec-title">◈ Checklist per oggi</div>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box"></div><div><span class="check-label">Ho aperto il documento (Word o Google Doc)</span><span class="check-sub">lo stesso documento che userò per tutto il progetto — non crearne uno nuovo ogni volta</span></div></div>
+    <div class="check-item"><div class="check-box"></div><div><span class="check-label">Ho aggiunto l'intestazione</span><span class="check-sub">Nome · Cognome · Classe · Ricetta · a.s. 2025–26</span></div></div>
+    <div class="check-item"><div class="check-box"></div><div><span class="check-label">Ho inserito il sommario con i titoli</span><span class="check-sub">Versione 1 e Versione 2.0 come sezioni principali</span></div></div>
+    <div class="check-item"><div class="check-box"></div><div><span class="check-label">Ho inserito lo screenshot del mio sito HTML attuale</span><span class="check-sub">sezione "Versione 1"</span></div></div>
+    <div class="check-item"><div class="check-box"></div><div><span class="check-label">Ho scritto il mio commento sulla Versione 1</span><span class="check-sub">almeno 3 frasi — cosa funziona e cosa vuoi cambiare</span></div></div>
+  </div>
+
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · Venezia</span>
+    <span class="hi">Recipe Glow Up — Dossier</span>
+    <span>a.s. 2025–26</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════
+     PAGINA 2 — PROMPT CHAIN
+═══════════════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">IPSSEOA Barbarigo · TIC · a.s. 2025–26</div>
+      <h1>Recipe <span>Glow Up</span></h1>
+      <div class="subtitle">Prompt chaining — come parlare all'AI per costruire la tua pagina</div>
+    </div>
+    <div class="badge orange">Prompt</div>
+  </div>
+
+  <div class="sec-title">◈ Cos'è il prompt chaining?</div>
+  <div class="chain">
+    <div class="chain-box">
+      <div class="chain-icon">💬</div>
+      <div class="chain-title">Prompt 1</div>
+      <div class="chain-desc">Descrivi l'idea generale. L'AI genera una prima versione.</div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-box">
+      <div class="chain-icon">🔍</div>
+      <div class="chain-title">Guardi il risultato</div>
+      <div class="chain-desc">Cosa non va? Cosa manca? Cosa cambiare?</div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-box">
+      <div class="chain-icon">✏️</div>
+      <div class="chain-title">Prompt 2, 3…</div>
+      <div class="chain-desc">Affini, correggi, aggiungi dettagli. Ogni messaggio costruisce sul precedente.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--light);border-left:3px solid var(--orange);padding:10px 14px;border-radius:0 4px 4px 0;font-size:10.5px;line-height:1.6;margin-bottom:14px;">
+    <strong style="color:var(--orange)">In parole semplici:</strong> è come una conversazione. L'AI ricorda tutto quello che hai scritto prima. Non devi ricominciare da zero — puoi dire <em>"come prima, ma cambia il colore dell'header"</em> e capisce.
+  </div>
+
+  <div class="sec-title">◈ Il tuo primo prompt — compila gli spazi</div>
+  <div class="prompt-intro">
+    <div class="prompt-label">◈ Copia questo template, compilalo e incollalo nell'AI</div>
+    <div class="prompt-line">
+      <span class="prompt-key">Voglio creare</span>
+      <span class="prompt-val">una pagina web per la ricetta di <span style="color:var(--orange)">[nome ricetta]</span></span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">L'idea creativa è</span>
+      <span class="prompt-val blank">[descrivi il tuo elemento unico — es. "un salame che si snoda come un serpente mentre scorri la pagina"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">La pagina ha</span>
+      <span class="prompt-val blank">[elenca le sezioni nell'ordine — es. "header con titolo, sezione ingredienti, sezione procedimento, footer"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Quando l'utente</span>
+      <span class="prompt-val blank">[descrivi l'interazione principale — es. "clicca il bottone, appare la lista ingredienti"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Colori e stile</span>
+      <span class="prompt-val blank">[es. "sfondo crema, testo scuro, accenti rossi, font arrotondato e informale"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Genera</span>
+      <span class="prompt-val">una pagina HTML completa con CSS incluso, pronta da aprire nel browser.</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="info-box-header">💡 Consigli per prompt efficaci</div>
+      <div class="info-box-body">
+        <div class="info-item"><span class="info-dot">→</span>Sii specifico: non "fallo bello" ma "sfondo color panna, titolo grande in grassetto"</div>
+        <div class="info-item"><span class="info-dot">→</span>Elenca le sezioni nell'ordine in cui devono apparire</div>
+        <div class="info-item"><span class="info-dot">→</span>Spiega le interazioni: "quando clicco X succede Y"</div>
+        <div class="info-item"><span class="info-dot">→</span>Usa il vocabolario giusto: header, footer, scroll, hover, transizione</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="info-box-header dark">📸 Documenta tutto nel dossier</div>
+      <div class="info-box-body">
+        <div class="info-item"><span class="info-dot">→</span>Screenshot del prompt che hai scritto</div>
+        <div class="info-item"><span class="info-dot">→</span>Screenshot del risultato (anche se non è perfetto)</div>
+        <div class="info-item"><span class="info-dot">→</span>Nota cosa hai cambiato al tentativo successivo</div>
+        <div class="info-item"><span class="info-dot">→</span>Almeno 2 iterazioni documentate per la valutazione</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--dark);border-radius:4px;padding:12px 14px;font-size:10px;line-height:1.7;color:#ccc">
+    <strong style="color:var(--orange)">Ricorda:</strong> il prompt lo scrivi tu. L'AI è uno strumento — tu sei il designer. Se il risultato non ti convince, non accettarlo. Spiega meglio, chiedi di cambiare, insisti. <span style="color:#fff;font-weight:600">Un buon prompt è come una buona ricetta: gli ingredienti giusti nell'ordine giusto.</span>
+  </div>
+
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · Venezia</span>
+    <span class="hi">Recipe Glow Up — Prompt Chain</span>
+    <span>a.s. 2025–26</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGINA 1 — RUBRICA DI VALUTAZIONE
+═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">IPSSEOA Barbarigo · TIC · a.s. 2024–25</div>
+      <h1>Recipe <span>Glow Up</span></h1>
+      <div class="subtitle">Rubrica di valutazione — Dossier del progetto</div>
+    </div>
+    <div class="badge">Valutazione</div>
+  </div>
+
+  <div class="sec-title">◈ Criteri e punteggi</div>
+
+  <table class="rubrica">
+    <thead>
+      <tr>
+        <th style="width:30%">Criterio</th>
+        <th>Descrizione</th>
+        <th class="score">/ pt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="cat">1. Screenshot originale</span><span class="desc">Documentazione del punto di partenza</span></td>
+        <td class="desc">Screenshot chiaro del sito HTML originale. Si capisce da dove è partito il progetto. Eventuale breve commento sul cosa non funzionava.</td>
+        <td class="score">10</td>
+      </tr>
+      <tr>
+        <td><span class="cat">2. Wireframe cartaceo</span><span class="desc">Qualità della prototipazione</span></td>
+        <td class="desc">Foto del wireframe. Le sezioni sono riconoscibili. Le interazioni sono descritte (frecce, note, annotazioni). Presenza dell'elemento creativo.</td>
+        <td class="score">15</td>
+      </tr>
+      <tr>
+        <td><span class="cat">3. Descrizione testuale</span><span class="desc">Capacità di comunicare l'idea</span></td>
+        <td class="desc">Testo che spiega l'idea progettuale. Usa il vocabolario corretto (header, scroll, hover, transizione…). Si capisce cosa fa l'utente e cosa succede.</td>
+        <td class="score">15</td>
+      </tr>
+      <tr>
+        <td><span class="cat">4. Progetto Canva</span><span class="desc">Mobile + Desktop</span></td>
+        <td class="desc">Due artboard presenti. Layout mobile e desktop sono diversi e coerenti. Ogni elemento è etichettato. Le interazioni sono indicate chiaramente.</td>
+        <td class="score">20</td>
+      </tr>
+      <tr>
+        <td><span class="cat">5. Prompt AI</span><span class="desc">Qualità della descrizione</span></td>
+        <td class="desc">Il prompt è specifico e usa il vocabolario tecnico. Sono inclusi gli screenshot dell'interazione con l'AI. Si vede l'iterazione (almeno 2 tentativi).</td>
+        <td class="score">20</td>
+      </tr>
+      <tr>
+        <td><span class="cat">6. Risultato finale</span><span class="desc">Coerenza con il progetto</span></td>
+        <td class="desc">Il risultato su Glowapp rispecchia l'idea del wireframe. C'è almeno un'interazione funzionante. La pagina è visivamente diversa dalla versione HTML originale.</td>
+        <td class="score">20</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="total-row">
+        <td colspan="2" style="color:#fff">Totale</td>
+        <td class="score">100</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="sec-title">◈ Livelli di valutazione</div>
+  <div class="livelli">
+    <div class="livello l1">
+      <div class="livello-header">🔴 Insufficiente &lt; 60</div>
+      <div class="livello-body">Elementi mancanti o non riconoscibili. Nessuna interazione. Il dossier è incompleto.</div>
+    </div>
+    <div class="livello l2">
+      <div class="livello-header">🟡 Sufficiente 60–74</div>
+      <div class="livello-body">Tutti gli elementi presenti ma essenziali. Descrizioni generiche. Un'interazione presente.</div>
+    </div>
+    <div class="livello l3">
+      <div class="livello-header">🟢 Buono 75–89</div>
+      <div class="livello-body">Dossier completo e ben descritto. Vocabolario corretto. Mobile e desktop distinti. Iterazione AI visibile.</div>
+    </div>
+    <div class="livello l4">
+      <div class="livello-header">🔵 Eccellente 90–100</div>
+      <div class="livello-body">Idea originale e ben realizzata. Prompt precisi. Più iterazioni AI. Risultato finale coerente e creativo.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div style="font-size:10px; color:#555; line-height:1.6">
+    <strong style="color:var(--orange)">Nota:</strong> Il dossier va consegnato come PDF unico con tutte le sezioni nell'ordine indicato. Le foto devono essere leggibili. I testi devono essere scritti dallo studente, non copiati dall'AI.
+  </div>
+
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · Venezia</span>
+    <span class="hi">Recipe Glow Up — Rubrica</span>
+    <span>a.s. 2024–25</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PAGINA 2 — SCHEDA CONSEGNA CANVA
+═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">IPSSEOA Barbarigo · TIC · a.s. 2024–25</div>
+      <h1>Recipe <span>Glow Up</span></h1>
+      <div class="subtitle">Scheda consegna — Progettazione su Canva</div>
+    </div>
+    <div class="badge orange">Canva</div>
+  </div>
+
+  <div class="sec-title">◈ Cosa devi creare</div>
+  <div class="artboards">
+    <div class="artboard">
+      <div class="artboard-label">📱 Mobile</div>
+      <div class="ab-section highlight">HEADER</div>
+      <div class="ab-section">Elemento creativo</div>
+      <div class="ab-section">Ingredienti</div>
+      <div class="ab-section">Procedimento</div>
+      <div class="ab-section">FOOTER</div>
+    </div>
+    <div class="artboard">
+      <div class="artboard-label">🖥️ Desktop</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;">
+        <div class="ab-section highlight" style="grid-column:1/-1">HEADER</div>
+        <div class="ab-section" style="grid-column:1/-1">Elemento creativo</div>
+        <div class="ab-section">Ingredienti</div>
+        <div class="ab-section">Procedimento</div>
+        <div class="ab-section highlight" style="grid-column:1/-1">FOOTER</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">◈ Passi da seguire</div>
+  <div class="canva-steps">
+    <div class="canva-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Apri Canva e crea una presentazione</div>
+        <div class="step-desc">Vai su canva.com → Crea → Presentazione. Rinomina il file: <em>NomeCognome_GlowUp</em></div>
+        <span class="step-tip">Formato consigliato: 1920×1080 per desktop, 390×844 per mobile</span>
+      </div>
+    </div>
+    <div class="canva-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Slide 1 — Versione Mobile</div>
+        <div class="step-desc">Riproduci il wireframe su Canva. Usa forme, colori e testo. <strong>Etichetta ogni elemento</strong> con una casella di testo che spiega cosa fa (es. "bottone → apre lista ingredienti").</div>
+      </div>
+    </div>
+    <div class="canva-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Slide 2 — Versione Desktop</div>
+        <div class="step-desc">Stessa pagina ma adattata allo schermo grande. <strong>Non copiare e incollare</strong> — il layout deve cambiare. Pensa: cosa sposto? Cosa metto affiancato invece che sopra?</div>
+        <span class="step-tip">Sul desktop puoi mettere menu laterale, colonne, hover effect</span>
+      </div>
+    </div>
+    <div class="canva-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Slide 3 — Descrizione testuale</div>
+        <div class="step-desc">Scrivi 5–8 frasi che spiegano il tuo progetto. Rispondi a: <em>Qual è l'idea creativa? Cosa succede quando l'utente interagisce? Perché hai scelto questo design?</em></div>
+      </div>
+    </div>
+    <div class="canva-step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Esporta come PDF e inserisci nel dossier</div>
+        <div class="step-desc">File → Scarica → PDF standard. Questo PDF diventa la sezione 4 del tuo dossier finale.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-box">
+      <div class="info-box-header">✓ Cosa deve esserci</div>
+      <div class="info-box-body">
+        <div class="info-item"><span class="info-dot">→</span>Entrambe le versioni (mobile + desktop)</div>
+        <div class="info-item"><span class="info-dot">→</span>Ogni sezione etichettata con nome e funzione</div>
+        <div class="info-item"><span class="info-dot">→</span>Almeno 1 interazione descritta con freccia e nota</div>
+        <div class="info-item"><span class="info-dot">→</span>L'elemento creativo ben visibile e spiegato</div>
+        <div class="info-item"><span class="info-dot">→</span>Colori e font scelti (anche approssimativi)</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="info-box-header dark">✗ Errori comuni da evitare</div>
+      <div class="info-box-body">
+        <div class="info-item"><span class="info-dot" style="color:#c62828">✗</span>Mobile e desktop identici — devono essere diversi</div>
+        <div class="info-item"><span class="info-dot" style="color:#c62828">✗</span>Nessuna etichetta — ogni elemento deve essere spiegato</div>
+        <div class="info-item"><span class="info-dot" style="color:#c62828">✗</span>Manca la descrizione testuale (slide 3)</div>
+        <div class="info-item"><span class="info-dot" style="color:#c62828">✗</span>Design uguale alla versione HTML originale</div>
+        <div class="info-item"><span class="info-dot" style="color:#c62828">✗</span>Nessuna interazione indicata</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · Venezia</span>
+    <span class="hi">Recipe Glow Up — Canva</span>
+    <span>a.s. 2024–25</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PAGINA 3 — TEMPLATE PROMPT CHAIN
+═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="eyebrow">IPSSEOA Barbarigo · TIC · a.s. 2024–25</div>
+      <h1>Recipe <span>Glow Up</span></h1>
+      <div class="subtitle">Template prompt chain — Come parlare all'AI</div>
+    </div>
+    <div class="badge">Prompt</div>
+  </div>
+
+  <div class="sec-title">◈ Il tuo prompt di partenza — compila gli spazi</div>
+
+  <div class="prompt-box">
+    <div class="prompt-label">◈ Prompt Template — copia, compila e incolla nell'AI</div>
+    <div class="prompt-line">
+      <span class="prompt-key">Voglio creare</span>
+      <span class="prompt-val">una pagina web per la ricetta di <span style="color:var(--orange)">[nome ricetta]</span></span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">L'idea creativa è</span>
+      <span class="prompt-val blank">[descrivi il tuo elemento creativo — es. "un salame che si snoda come un serpente quando scorri la pagina"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">La pagina ha</span>
+      <span class="prompt-val blank">[descrivi le sezioni — es. "un header con titolo grande, una sezione ingredienti, una sezione procedimento, un footer"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Quando l'utente</span>
+      <span class="prompt-val blank">[descrivi l'interazione — es. "clicca sul bottone a forma di donut, appare la lista ingredienti"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Su mobile</span>
+      <span class="prompt-val blank">[descrivi cosa cambia — es. "il menu è in basso, le sezioni sono una sotto l'altra"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Colori e stile</span>
+      <span class="prompt-val blank">[es. "sfondo crema, testo scuro, accenti arancioni, font arrotondato"]</span>
+    </div>
+    <div class="prompt-line">
+      <span class="prompt-key">Genera</span>
+      <span class="prompt-val">una pagina HTML completa con CSS incluso, pronta da usare su Glowapp.</span>
+    </div>
+  </div>
+
+  <div class="sec-title">◈ Come iterare — cosa fare se il risultato non è quello che volevi</div>
+  <div class="iter-grid">
+    <div class="iter-box">
+      <div class="iter-header">🔁 Tentativo 1</div>
+      <div class="iter-body">Manda il prompt base. Guarda il risultato. Cosa non va? Scrivi qui:<br><br>
+      <div style="border-bottom:1px dashed #ccc;margin:6px 0;height:16px"></div>
+      <div style="border-bottom:1px dashed #ccc;margin:6px 0;height:16px"></div>
+      </div>
+    </div>
+    <div class="iter-box">
+      <div class="iter-header">🔁 Tentativo 2</div>
+      <div class="iter-body">Aggiungi al prompt: <em>"Il risultato precedente non va bene perché…"</em> poi descrivi cosa correggere.<br><br>
+      <div style="border-bottom:1px dashed #ccc;margin:6px 0;height:16px"></div>
+      <div style="border-bottom:1px dashed #ccc;margin:6px 0;height:16px"></div>
+      </div>
+    </div>
+    <div class="iter-box">
+      <div class="iter-header">✅ Tentativo 3</div>
+      <div class="iter-body">Affina i dettagli. Aggiungi animazioni, cambia colori, modifica il testo. Quando sei soddisfatto: screenshot e salva.<br><br>
+      <div style="border-bottom:1px dashed #ccc;margin:6px 0;height:16px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">◈ Consigli per un prompt efficace</div>
+  <div class="tips-grid">
+    <div class="tip"><strong>🎯 Sii specifico</strong>Non scrivere "fallo bello". Scrivi "sfondo color panna, titolo in grassetto grande, bottone arrotondato arancione".</div>
+    <div class="tip"><strong>📐 Descrivi la struttura</strong>Elenca le sezioni nell'ordine in cui devono apparire. L'AI non indovina — devi guidarla.</div>
+    <div class="tip"><strong>🖱️ Spiega le interazioni</strong>"Quando clicco X succede Y" è il formato giusto. Senza questo l'AI fa una pagina statica.</div>
+    <div class="tip"><strong>📱 Ricorda il mobile</strong>Aggiungi sempre "su mobile le sezioni sono verticali e il menu è accessibile con un tap".</div>
+    <div class="tip"><strong>🔄 Usa il contesto</strong>Nella stessa conversazione, l'AI ricorda i messaggi precedenti. Puoi dire "come prima, ma cambia il colore dell'header".</div>
+    <div class="tip"><strong>📸 Documenta tutto</strong>Fai screenshot di ogni tentativo, anche quelli sbagliati. Faranno parte del tuo dossier.</div>
+  </div>
+
+  <div style="background:var(--light);border:1.5px solid var(--orange);border-radius:4px;padding:10px 14px;font-size:10px;line-height:1.6">
+    <strong style="color:var(--orange)">Ricorda:</strong> Il prompt è tuo. L'AI è uno strumento — tu sei il designer. Se il risultato non ti convince, non accettarlo: spiega meglio, chiedi di cambiare, insisti. Un buon prompt è come una buona ricetta: gli ingredienti giusti nell'ordine giusto.
+  </div>
+
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · Venezia</span>
+    <span class="hi">Recipe Glow Up — Prompt Chain</span>
+    <span>a.s. 2024–25</span>
+  </div>
+</div>
+</body>
+</html>
