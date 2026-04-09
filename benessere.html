@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Data — Regia Lezione</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0e0c0a;
+  --paper: #f5f0e8;
+  --red: #c9362a;
+  --gold: #d4972a;
+  --teal: #2a7d6e;
+  --dim: rgba(245,240,232,0.4);
+  --grid: rgba(245,240,232,0.04);
+}
+
+body {
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.title em { color: var(--red); font-style: italic; }
+
+.subtitle {
+  margin-top: 12px;
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: 100%;
+  max-width: 860px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .cards { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: rgba(245,240,232,0.04);
+  border: 1px solid rgba(245,240,232,0.1);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--paper);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.card-1::before { background: var(--red); }
+.card-2::before { background: var(--gold); }
+.card-3::before { background: var(--teal); }
+
+.card:hover {
+  background: rgba(245,240,232,0.07);
+  border-color: rgba(245,240,232,0.2);
+}
+
+.card:hover::before { transform: scaleX(1); }
+
+.card-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.card-step {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.08;
+  position: absolute;
+  top: 20px;
+  right: 24px;
+}
+
+.card-title {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.card-desc {
+  font-size: 0.7rem;
+  color: var(--dim);
+  line-height: 1.8;
+  flex: 1;
+}
+
+.card-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid;
+  align-self: flex-start;
+}
+
+.tag-1 { color: var(--red);  border-color: var(--red); }
+.tag-2 { color: var(--gold); border-color: var(--gold); }
+.tag-3 { color: var(--teal); border-color: var(--teal); }
+
+.card-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+  align-self: flex-end;
+  opacity: 0.4;
+}
+
+.card:hover .card-arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+}
+
+.timeline {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  max-width: 860px;
+  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.tl-item {
+  flex: 1;
+  padding: 14px 18px;
+  border: 1px solid rgba(245,240,232,0.06);
+  font-size: 0.62rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+.tl-time {
+  font-weight: 700;
+  color: var(--paper);
+  margin-bottom: 2px;
+  letter-spacing: 0.04em;
+}
+
+.footer {
+  margin-top: 48px;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.2);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Educazione Civica · Benessere Digitale · Classi Prime</div>
+  <h1 class="title">Dear Data —<br><em>regia lezione</em></h1>
+  <p class="subtitle">2 ore · laboratorio · apri nell'ordine</p>
+</div>
+
+<div class="cards">
+
+  <a class="card card-1" href="dear-data-slide-prime.html" target="_blank">
+    <div class="card-step">01</div>
+    <div class="card-num">Artefatto 01 · 0–40 min</div>
+    <div class="card-title">Slide<br>lezione</div>
+    <div class="card-desc">
+      7 slide per la LIM.<br>
+      Click o frecce per avanzare.<br>
+      Tasto F per fullscreen.
+    </div>
+    <span class="card-tag tag-1">LIM · proiettore</span>
+    <div class="card-arrow">↗</div>
+  </a>
+
+  <a class="card card-2" href="dear-data-scheda-studente.html" target="_blank">
+    <div class="card-step">02</div>
+    <div class="card-num">Artefatto 02 · 40–60 min</div>
+    <div class="card-title">Scheda<br>studente</div>
+    <div class="card-desc">
+      A4 stampabile.<br>
+      Simboli, regole, tabella 7 giorni,<br>
+      spazio riflessione.
+    </div>
+    <span class="card-tag tag-2">Stampa · 1 per studente</span>
+    <div class="card-arrow">↗</div>
+  </a>
+
+  <a class="card card-3" href="dear-data-telefono.html" target="_blank">
+    <div class="card-step">03</div>
+    <div class="card-num">Artefatto 03 · 60–120 min</div>
+    <div class="card-title">Toolkit<br>interattivo</div>
+    <div class="card-desc">
+      Dati live, grafico, guida simboli,<br>
+      rubrica di valutazione.<br>
+      Riferimento per il Canva.
+    </div>
+    <span class="card-tag tag-3">Laboratorio · Canva</span>
+    <div class="card-arrow">↗</div>
+  </a>
+
+</div>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">0 – 40 min</div>
+    Aggancio · slide · apri il telefono · dato di ieri
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">40 – 60 min</div>
+    Consegna scheda · simboli · legenda · regole
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">60 – 120 min</div>
+    Laboratorio Canva · visualizzazione · raccolta dati
+  </div>
+</div>
+
+<div class="footer">
+  Tutti i file devono essere nella stessa cartella · IPSSEOA Andrea Barbarigo · TIC a.s. 2025–26
+</div>
+
+</body>
+</html>
