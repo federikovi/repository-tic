@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Data — Slide Lezione · Classi Prime</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0e0c0a;
+  --paper: #f5f0e8;
+  --red: #e03a2f;
+  --gold: #e8a825;
+  --teal: #2bb5a0;
+  --blue: #3a6fd8;
+  --rose: #d4645a;
+  --sage: #7fb77e;
+  --dim: rgba(245,240,232,0.35);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Space Mono', monospace;
+}
+
+.deck {
+  width: 100%; height: 100%;
+  position: relative;
+}
+
+/* SLIDE BASE */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 80px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  overflow: hidden;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── SLIDE 1: TITLE ── */
+#s1 {
+  background: var(--bg);
+  color: var(--paper);
+  text-align: center;
+}
+
+#s1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,240,232,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,240,232,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.s1-eyebrow {
+  font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.s1-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.s1-title em {
+  color: var(--red);
+  font-style: italic;
+}
+
+.s1-sub {
+  margin-top: 32px;
+  font-size: clamp(0.7rem, 1.4vw, 1rem);
+  color: var(--dim);
+  letter-spacing: 0.06em;
+  position: relative;
+  z-index: 1;
+}
+
+.s1-decoration {
+  position: absolute;
+  bottom: 60px;
+  right: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 1;
+}
+.s1-decoration span {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: right;
+}
+
+/* ── SLIDE 2: BIG NUMBER ── */
+#s2 {
+  background: var(--red);
+  color: var(--paper);
+  text-align: center;
+  flex-direction: column;
+  gap: 0;
+}
+
+.big-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(5rem, 20vw, 16rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  animation: pulse-in 0.6s ease both;
+}
+
+@keyframes pulse-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.big-number-label {
+  font-size: clamp(0.8rem, 2vw, 1.3rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 16px;
+  opacity: 0.7;
+}
+
+.big-number-caption {
+  margin-top: 32px;
+  font-size: clamp(0.65rem, 1.3vw, 0.9rem);
+  opacity: 0.6;
+  letter-spacing: 0.06em;
+}
+
+/* ── SLIDE 3: DOMANDA ── */
+#s3 {
+  background: var(--paper);
+  color: var(--bg);
+}
+
+.question-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.question-left {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+}
+
+.question-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  background: var(--paper);
+}
+
+.q-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1.2;
+}
+
+.time-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.time-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.time-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: rgba(14,12,10,0.1);
+  position: relative;
+}
+
+.time-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transition: width 1s ease;
+}
+
+.time-label {
+  font-size: 0.7rem;
+  min-width: 90px;
+  letter-spacing: 0.04em;
+}
+
+.time-hours {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  min-width: 50px;
+  text-align: right;
+}
+
+.remaining-box {
+  margin-top: 32px;
+  border: 2px solid var(--bg);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.remaining-q {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+}
+
+.remaining-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: var(--red);
+}
+
+/* ── SLIDE 4: DEAR DATA ── */
+#s4 {
+  background: var(--paper);
+  color: var(--bg);
+}
+
+.deardata-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%; height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.dd-left {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dd-right {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  gap: 24px;
+}
+
+.dd-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.dd-title span { color: var(--red); }
+
+.dd-body {
+  font-size: clamp(0.65rem, 1.3vw, 0.85rem);
+  line-height: 1.8;
+  opacity: 0.7;
+  max-width: 400px;
+}
+
+.dd-body strong { color: var(--bg); opacity: 1; font-weight: 700; }
+
+.postcard-mock {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1.6;
+  background: var(--paper);
+  border-radius: 2px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.postcard-mock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,12,10,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,12,10,0.05) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.pc-symbols {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+}
+
+.pc-sym {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  opacity: 0.85;
+}
+
+.postcard-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: center;
+}
+
+/* ── SLIDE 5: ISTRUZIONI ── */
+#s5 {
+  background: var(--bg);
+  color: var(--paper);
+}
+
+.steps-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.steps-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.steps-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 700;
+}
+
+.steps-header p {
+  font-size: 0.75rem;
+  color: var(--dim);
+  margin-top: 8px;
+  letter-spacing: 0.06em;
+}
+
+.steps-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.step-block {
+  background: rgba(245,240,232,0.04);
+  border: 1px solid rgba(245,240,232,0.1);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.4;
+}
+
+.step-t {
+  font-size: clamp(0.75rem, 1.3vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.step-d {
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
+  line-height: 1.7;
+  color: var(--dim);
+}
+
+/* ── SLIDE 6: APRI IL TELEFONO ── */
+#s6 {
+  background: var(--teal);
+  color: var(--bg);
+  text-align: center;
+}
+
+.action-emoji {
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 1;
+  margin-bottom: 24px;
+  filter: grayscale(0);
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.action-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.action-steps {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.action-step {
+  background: rgba(14,12,10,0.1);
+  border: 1px solid rgba(14,12,10,0.2);
+  padding: 14px 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.action-step .as-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0.4;
+}
+
+.android-path {
+  background: rgba(14,12,10,0.08);
+  border: 1px dashed rgba(14,12,10,0.25);
+  padding: 16px 24px;
+  margin-top: 20px;
+  font-size: 0.7rem;
+  line-height: 1.8;
+  text-align: left;
+  max-width: 500px;
+}
+
+.android-path strong { opacity: 1; }
+
+/* ── SLIDE 7: COMPITO ── */
+#s7 {
+  background: var(--paper);
+  color: var(--bg);
+  text-align: center;
+}
+
+.compito-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.compito-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 40px;
+}
+
+.compito-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 32px;
+}
+
+.compito-cell {
+  background: var(--bg);
+  color: var(--paper);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.compito-icon { font-size: 2rem; }
+
+.compito-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.compito-desc {
+  font-size: 0.65rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+.compito-note {
+  font-size: 0.72rem;
+  background: var(--gold);
+  color: var(--bg);
+  padding: 10px 24px;
+  letter-spacing: 0.06em;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 100;
+  background: rgba(14,12,10,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(245,240,232,0.12);
+  padding: 10px 20px;
+  border-radius: 40px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--paper);
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.nav-btn:hover { opacity: 1; }
+
+.nav-indicator {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  min-width: 60px;
+  text-align: center;
+}
+
+.slide-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--paper);
+  opacity: 0.2;
+  transition: opacity 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.dot.active { opacity: 1; transform: scale(1.3); }
+
+/* keyboard hint */
+.key-hint {
+  position: fixed;
+  bottom: 28px;
+  right: 40px;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.2);
+  text-transform: uppercase;
+}
+
+/* slide number */
+.slide-num {
+  position: fixed;
+  top: 28px;
+  right: 40px;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: rgba(245,240,232,0.2);
+  z-index: 50;
+  transition: color 0.4s;
+}
+
+.slide-num.dark { color: rgba(14,12,10,0.25); }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide active" id="s1">
+    <div class="s1-eyebrow">Educazione Civica · Benessere Digitale</div>
+    <div class="s1-title">
+      Quanto uso<br>
+      <em>il telefono?</em>
+    </div>
+    <div class="s1-sub">Un progetto ispirato a Dear Data · Classi Prime TIC</div>
+    <div class="s1-decoration">
+      <span>Stefanie Posavec</span>
+      <span>&amp; Giorgia Lupi</span>
+      <span style="margin-top:4px;color:var(--gold)">Dear Data, 2016</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: BIG NUMBER -->
+  <div class="slide" id="s2">
+    <div class="big-number" id="animNum">4:37</div>
+    <div class="big-number-label">ore e minuti al giorno</div>
+    <div class="big-number-caption">media italiana di utilizzo dello smartphone · 2024</div>
+  </div>
+
+  <!-- SLIDE 3: CONFRONTO ORE -->
+  <div class="slide" id="s3">
+    <div class="question-layout">
+      <div class="question-left">
+        <div class="q-label">La domanda</div>
+        <div class="q-text">E il resto<br>della giornata<br>dov'è?</div>
+      </div>
+      <div class="question-right">
+        <div class="time-breakdown">
+          <div class="time-row">
+            <div class="time-label" style="color:var(--blue)">💤 Sonno</div>
+            <div class="time-bar-bg"><div class="time-bar-fill" style="width:33.3%;background:var(--blue)"></div></div>
+            <div class="time-hours">8h</div>
+          </div>
+          <div class="time-row">
+            <div class="time-label" style="color:var(--gold)">🏫 Scuola</div>
+            <div class="time-bar-bg"><div class="time-bar-fill" style="width:25%;background:var(--gold)"></div></div>
+            <div class="time-hours">6h</div>
+          </div>
+          <div class="time-row">
+            <div class="time-label" style="color:var(--red)">📱 Telefono</div>
+            <div class="time-bar-bg"><div class="time-bar-fill" style="width:19%;background:var(--red)"></div></div>
+            <div class="time-hours">4.5h</div>
+          </div>
+          <div class="time-row">
+            <div class="time-label" style="color:var(--sage)">🍽 Pasti</div>
+            <div class="time-bar-bg"><div class="time-bar-fill" style="width:6.25%;background:var(--sage)"></div></div>
+            <div class="time-hours">1.5h</div>
+          </div>
+          <div class="time-row">
+            <div class="time-label" style="color:var(--teal)">🚌 Tragitto</div>
+            <div class="time-bar-bg"><div class="time-bar-fill" style="width:4%;background:var(--teal)"></div></div>
+            <div class="time-hours">1h</div>
+          </div>
+        </div>
+        <div class="remaining-box">
+          <div class="remaining-q">Ore rimaste<br><span style="font-size:0.6rem;opacity:0.5">cosa ci fai?</span></div>
+          <div class="remaining-num">3h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: DEAR DATA -->
+  <div class="slide" id="s4">
+    <div class="deardata-layout">
+      <div class="dd-left">
+        <div class="q-label" style="color:var(--red)">Il progetto originale</div>
+        <div class="dd-title">Dear <span>Data</span></div>
+        <div class="dd-body">
+          Stefanie Posavec e Giorgia Lupi si sono scambiate <strong>cartoline disegnate a mano</strong> per un anno intero.<br><br>
+          Ogni settimana un dato diverso della loro vita. Ogni simbolo tracciato con cura.<br><br>
+          <strong>Nessun computer. Nessun grafico automatico.</strong><br>
+          Solo carta, penna, e la curiosità di capire la propria vita attraverso i numeri.
+        </div>
+      </div>
+      <div class="dd-right">
+        <div class="postcard-mock">
+          <div class="pc-symbols" id="pc-symbols-container">
+          </div>
+        </div>
+        <div class="postcard-label">esempio di visualizzazione manuale</div>
+        <div class="postcard-mock" style="opacity:0.5; transform: rotate(-3deg) translateY(-10px) translateX(20px); position:absolute; right:40px; bottom:80px; width:160px; height:100px;">
+          <div class="pc-symbols" id="pc-symbols-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: STEPS -->
+  <div class="slide" id="s5">
+    <div class="steps-layout">
+      <div class="steps-header">
+        <h2>Come funziona il progetto</h2>
+        <p>4 passi · una settimana · carta + digitale</p>
+      </div>
+      <div class="steps-row">
+        <div class="step-block">
+          <div class="step-n">01</div>
+          <div class="step-t">Raccogliere</div>
+          <div class="step-d">Ogni sera per 7 giorni apri Benessere Digitale e compila la scheda. 5 minuti al giorno.</div>
+        </div>
+        <div class="step-block" style="border-color:rgba(232,168,37,0.3)">
+          <div class="step-n" style="color:var(--gold)">02</div>
+          <div class="step-t">Disegnare</div>
+          <div class="step-d">Trasforma i tuoi dati in simboli su carta. Ogni ora = un segno. Tu scegli la forma.</div>
+        </div>
+        <div class="step-block" style="border-color:rgba(43,181,160,0.3)">
+          <div class="step-n" style="color:var(--teal)">03</div>
+          <div class="step-t">Fare la legenda</div>
+          <div class="step-d">Scrivi la legenda: chi legge il tuo disegno deve capirlo senza chiederti nulla.</div>
+        </div>
+        <div class="step-block" style="border-color:rgba(212,100,90,0.3)">
+          <div class="step-n" style="color:var(--rose)">04</div>
+          <div class="step-t">Riflettere</div>
+          <div class="step-d">Cosa ti ha sorpreso? Confronta con i compagni. Scrivi 3 righe sul dossier finale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: APRI IL TELEFONO -->
+  <div class="slide" id="s6">
+    <div class="action-emoji">📱</div>
+    <div class="action-title">Adesso apri<br>il tuo telefono</div>
+
+    <div class="action-steps">
+      <div class="action-step">
+        <div class="as-num">A</div>
+        <div>
+          <div style="font-weight:700;font-size:0.8rem;margin-bottom:4px">Android</div>
+          <div style="font-size:0.65rem;opacity:0.7">Impostazioni → Benessere Digitale<br>→ Tempo di utilizzo</div>
+        </div>
+      </div>
+      <div class="action-step">
+        <div class="as-num">🍎</div>
+        <div>
+          <div style="font-weight:700;font-size:0.8rem;margin-bottom:4px">iPhone</div>
+          <div style="font-size:0.65rem;opacity:0.7">Impostazioni → Tempo di utilizzo<br>→ Visualizza tutto</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;font-size:0.9rem;font-weight:700;letter-spacing:0.06em;">
+      Quante ore ieri? → scrivi sul quaderno
+    </div>
+  </div>
+
+  <!-- SLIDE 7: COMPITO -->
+  <div class="slide" id="s7">
+    <div class="compito-title">Il tuo compito per questa settimana</div>
+    <div class="compito-subtitle">Ogni sera · 5 minuti · scheda sulla scheda</div>
+
+    <div class="compito-grid">
+      <div class="compito-cell">
+        <div class="compito-icon">📱</div>
+        <div class="compito-name">Telefono</div>
+        <div class="compito-desc">Benessere Digitale /<br>Tempo di utilizzo</div>
+      </div>
+      <div class="compito-cell" style="background:var(--blue)">
+        <div class="compito-icon">💤</div>
+        <div class="compito-name">Sonno</div>
+        <div class="compito-desc">Ora in cui vai a letto<br>– ora in cui ti svegli</div>
+      </div>
+      <div class="compito-cell" style="background:var(--gold);color:var(--bg)">
+        <div class="compito-icon">🏫</div>
+        <div class="compito-name">Scuola</div>
+        <div class="compito-desc">Ore di lezione + intervalli<br>(già lo sai!)</div>
+      </div>
+      <div class="compito-cell" style="background:var(--sage);color:var(--bg)">
+        <div class="compito-icon">🍽</div>
+        <div class="compito-name">Pasti</div>
+        <div class="compito-desc">Stima: quanto tempo<br>passi a mangiare?</div>
+      </div>
+      <div class="compito-cell" style="background:var(--teal)">
+        <div class="compito-icon">🚌</div>
+        <div class="compito-name">Tragitto</div>
+        <div class="compito-desc">Minuti casa↔scuola<br>× 2 (andata + ritorno)</div>
+      </div>
+      <div class="compito-cell" style="background:var(--rose)">
+        <div class="compito-icon">⚽</div>
+        <div class="compito-name">Calcio / Sport</div>
+        <div class="compito-desc">Allenamento, partita,<br>o altra attività fisica</div>
+      </div>
+    </div>
+
+    <div class="compito-note">La settimana prossima: disegniamo insieme 🎨</div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
+  <div class="slide-dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+</div>
+
+<div class="key-hint">← → o click per navigare · F per fullscreen</div>
+<div class="slide-num" id="slideNum">1 / 7</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dots');
+const slideNumEl = document.getElementById('slideNum');
+let current = 0;
+
+// Create dots
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsContainer.appendChild(d);
+});
+
+// Dark text slides
+const darkTextSlides = [2, 5]; // s3, s6 (0-indexed)
+const lightBgSlides = [2, 6]; // slides where slide-num should be dark
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dotsContainer.querySelectorAll('.dot')[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  slides[current].classList.add('active');
+  dotsContainer.querySelectorAll('.dot')[current].classList.add('active');
+  slideNumEl.textContent = (current + 1) + ' / ' + slides.length;
+  slideNumEl.className = 'slide-num' + (lightBgSlides.includes(current) ? ' dark' : '');
+
+  // Animate bars on slide 3
+  if (current === 2) animateBars();
+  // Animate postcard on slide 4
+  if (current === 3) buildPostcard();
+}
+
+function changeSlide(dir) { goTo(current + dir); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); changeSlide(-1); }
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+
+// Click anywhere to advance (except nav)
+document.querySelector('.deck').addEventListener('click', e => {
+  if (!e.target.closest('.nav')) changeSlide(1);
+});
+
+function animateBars() {
+  const fills = document.querySelectorAll('#s3 .time-bar-fill');
+  fills.forEach(f => {
+    const target = f.style.width;
+    f.style.width = '0';
+    setTimeout(() => { f.style.width = target; }, 100);
+  });
+}
+
+const COLORS = ['#e03a2f','#3a6fd8','#e8a825','#7fb77e','#2bb5a0','#d4645a','#c9a050','#4a8fd8'];
+
+function buildPostcard() {
+  const c1 = document.getElementById('pc-symbols-container');
+  const c2 = document.getElementById('pc-symbols-2');
+  if (c1.children.length > 0) return;
+
+  const shapes = ['circle','square','triangle','diamond'];
+  for (let i = 0; i < 35; i++) {
+    const d = document.createElement('div');
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    const size = 8 + Math.random() * 10;
+    d.style.cssText = `width:${size}px;height:${size}px;background:${color};border-radius:${Math.random() > 0.5 ? '50%' : '0'};opacity:${0.6 + Math.random()*0.4}`;
+    c1.appendChild(d);
+  }
+  for (let i = 0; i < 12; i++) {
+    const d = document.createElement('div');
+    d.style.cssText = `width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;background:${COLORS[Math.floor(Math.random()*COLORS.length)]};border-radius:${Math.random()>0.5?'50%':'0'}`;
+    c2.appendChild(d);
+  }
+}
+</script>
+</body>
+</html>

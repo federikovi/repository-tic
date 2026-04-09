@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Data — Scheda Disegno · Stampa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1a1208;
+  --paper: #ffffff;
+  --red: #c9362a;
+  --gold: #d4972a;
+  --teal: #2a7d6e;
+  --blue: #2a4d8f;
+  --rose: #c96a5a;
+  --sage: #7a9e7e;
+  --grid: rgba(26,18,8,0.07);
+}
+
+body {
+  background: #e0ddd8;
+  font-family: 'Space Mono', monospace;
+  padding: 20px;
+}
+
+.sheet {
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--paper);
+  margin: 0 auto;
+  padding: 14mm 16mm 14mm;
+  position: relative;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+}
+
+/* Graph paper background */
+.sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 5mm 5mm;
+  pointer-events: none;
+}
+
+/* Red margin line, classic */
+.sheet::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 28mm;
+  width: 1px;
+  background: rgba(201,54,42,0.2);
+}
+
+.content { position: relative; z-index: 1; }
+
+/* ── HEADER ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 6mm;
+  border-bottom: 1.5px solid var(--ink);
+  margin-bottom: 6mm;
+}
+
+.header-left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.header-left h1 em { color: var(--red); font-style: italic; }
+
+.header-left .sub {
+  font-size: 6pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-top: 3px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 6.5pt;
+}
+
+.field-row label { opacity: 0.45; }
+.field-line { width: 36mm; border-bottom: 1px solid rgba(26,18,8,0.25); height: 12px; }
+.field-line.short { width: 20mm; }
+
+/* ── INTRO BOX ── */
+.intro-box {
+  background: var(--ink);
+  color: white;
+  padding: 5mm 6mm;
+  margin-bottom: 6mm;
+  font-size: 7pt;
+  line-height: 1.8;
+}
+
+.intro-box strong { color: #e8c87a; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 6pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 3mm;
+  margin-top: 5mm;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--red);
+  opacity: 0.25;
+}
+
+/* ── SYMBOL TABLE ── */
+.symbol-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2mm;
+}
+
+.symbol-table th {
+  font-size: 5.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 3px 6px;
+  background: var(--ink);
+  color: white;
+  font-weight: 400;
+}
+
+.symbol-table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(26,18,8,0.08);
+  vertical-align: middle;
+  font-size: 7pt;
+}
+
+.symbol-table tr:nth-child(even) td { background: rgba(26,18,8,0.02); }
+
+.sym-icon {
+  width: 18mm;
+  text-align: center;
+}
+
+.sym-draw {
+  width: 30mm;
+}
+
+.sym-draw-box {
+  width: 28mm;
+  height: 14mm;
+  border: 1px dashed rgba(26,18,8,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.cat-name { font-weight: 700; font-size: 7.5pt; }
+.cat-source { font-size: 5.5pt; opacity: 0.45; margin-top: 1px; }
+.cat-tip { font-size: 6pt; opacity: 0.6; line-height: 1.5; }
+
+/* SVG symbols */
+svg.sym { width: 28px; height: 28px; }
+
+/* ── RULES BOX ── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm;
+  margin-bottom: 4mm;
+}
+
+.rule-card {
+  border: 1px solid rgba(26,18,8,0.12);
+  padding: 4mm;
+}
+
+.rule-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22pt;
+  line-height: 1;
+  color: var(--red);
+  opacity: 0.25;
+  margin-bottom: 2mm;
+}
+
+.rule-title { font-size: 7pt; font-weight: 700; margin-bottom: 2mm; }
+.rule-body { font-size: 6pt; line-height: 1.7; opacity: 0.65; }
+
+/* ── TRACKING GRID ── */
+.tracking-wrapper {
+  margin-bottom: 4mm;
+}
+
+.tg {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6.5pt;
+}
+
+.tg th {
+  background: var(--ink);
+  color: white;
+  padding: 4px 6px;
+  text-align: center;
+  font-size: 5.5pt;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
+
+.tg td {
+  border: 1px solid rgba(26,18,8,0.1);
+  padding: 0;
+  height: 11mm;
+  min-width: 8mm;
+}
+
+.tg td.cat-cell {
+  padding: 3px 5px;
+  height: auto;
+  width: 34mm;
+  vertical-align: middle;
+}
+
+.tg-cat-name { font-weight: 700; font-size: 6.5pt; }
+.tg-cat-unit { font-size: 5pt; opacity: 0.4; }
+
+/* ── NOTA / RIFLESSIONE ── */
+.notes-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm;
+  margin-bottom: 4mm;
+}
+
+.notes-box {
+  border: 1px solid rgba(26,18,8,0.12);
+  padding: 4mm;
+  min-height: 30mm;
+}
+
+.notes-box-title {
+  font-size: 5.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  margin-bottom: 4mm;
+}
+
+.note-line {
+  border-bottom: 1px solid rgba(26,18,8,0.1);
+  height: 5mm;
+  margin-bottom: 0;
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 5mm;
+  padding-top: 3mm;
+  border-top: 1px solid rgba(26,18,8,0.12);
+  display: flex;
+  justify-content: space-between;
+  font-size: 5pt;
+  opacity: 0.3;
+  letter-spacing: 0.08em;
+}
+
+/* ── ESEMPIO DISEGNO ── */
+.example-area {
+  border: 1px dashed rgba(26,18,8,0.15);
+  padding: 4mm;
+  margin-bottom: 4mm;
+}
+
+.example-label {
+  font-size: 5.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  margin-bottom: 3mm;
+}
+
+.example-row {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  flex-wrap: wrap;
+}
+
+.ex-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2mm;
+  font-size: 5.5pt;
+  opacity: 0.7;
+  text-align: center;
+}
+
+@media print {
+  body { background: white; padding: 0; }
+  .sheet { box-shadow: none; margin: 0; }
+  .no-print { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+<div class="content">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Dear Data<br><em>Quanto uso il telefono?</em></h1>
+      <div class="sub">Scheda istruzioni per il disegno · Classi Prime TIC</div>
+    </div>
+    <div class="header-right">
+      <div class="field-row"><label>Nome</label><div class="field-line"></div></div>
+      <div class="field-row"><label>Classe</label><div class="field-line short"></div></div>
+      <div class="field-row"><label>Dal</label><div class="field-line short"></div><label>al</label><div class="field-line short"></div></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <strong>Cos'è Dear Data?</strong> — Stefanie Posavec e Giorgia Lupi si sono scambiate cartoline disegnate a mano per un anno. Ogni settimana raccoglievano dati sulla propria vita e li trasformavano in simboli, colori, forme. <strong>Nessun computer.</strong> Solo carta e penna. Questa settimana tocca a te fare lo stesso con i dati del tuo telefono.
+  </div>
+
+  <!-- SYMBOLS -->
+  <div class="section-title">I tuoi simboli — 1 ora = 1 simbolo</div>
+
+  <table class="symbol-table">
+    <thead>
+      <tr>
+        <th class="sym-icon">Categoria</th>
+        <th>Nome e fonte del dato</th>
+        <th>Suggerimento simbolo</th>
+        <th class="sym-draw">Il tuo simbolo (disegna qui)</th>
+        <th>Colore suggerito</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sym-icon">
+          <svg class="sym" viewBox="0 0 28 28">
+            <rect x="8" y="2" width="12" height="22" rx="2" fill="none" stroke="#c9362a" stroke-width="1.5"/>
+            <rect x="11" y="21" width="6" height="1.5" rx="0.75" fill="#c9362a"/>
+            <circle cx="14" cy="6" r="1" fill="#c9362a"/>
+          </svg>
+        </td>
+        <td>
+          <div class="cat-name" style="color:var(--red)">📱 Telefono</div>
+          <div class="cat-source">da: Impostazioni → Benessere Digitale (Android)<br>oppure Tempo di utilizzo (iPhone)</div>
+        </td>
+        <td class="cat-tip">Cerchio pieno, piccolo rettangolo,<br>punto con bordo. Ripeti per ogni ora.</td>
+        <td><div class="sym-draw-box"></div></td>
+        <td><span class="color-swatch" style="background:#c9362a"></span>Rosso</td>
+      </tr>
+      <tr>
+        <td class="sym-icon">
+          <svg class="sym" viewBox="0 0 28 28">
+            <path d="M4 14 Q14 2 24 14 Q14 26 4 14Z" fill="none" stroke="#2a4d8f" stroke-width="1.5"/>
+            <circle cx="14" cy="14" r="3" fill="#2a4d8f"/>
+          </svg>
+        </td>
+        <td>
+          <div class="cat-name" style="color:var(--blue)">💤 Sonno</div>
+          <div class="cat-source">da: orario in cui vai a letto e ti svegli<br>(conta anche i riposini!)</div>
+        </td>
+        <td class="cat-tip">Luna, onda orizzontale,<br>linea tratteggiata.</td>
+        <td><div class="sym-draw-box"></div></td>
+        <td><span class="color-swatch" style="background:#2a4d8f"></span>Blu</td>
+      </tr>
+      <tr>
+        <td class="sym-icon">
+          <svg class="sym" viewBox="0 0 28 28">
+            <rect x="4" y="12" width="20" height="13" rx="0.5" fill="none" stroke="#d4972a" stroke-width="1.5"/>
+            <path d="M4 12 L14 4 L24 12" fill="none" stroke="#d4972a" stroke-width="1.5"/>
+            <rect x="11" y="17" width="6" height="8" fill="#d4972a" opacity="0.35"/>
+          </svg>
+        </td>
+        <td>
+          <div class="cat-name" style="color:var(--gold)">🏫 Scuola</div>
+          <div class="cat-source">da: orario scolastico (già lo conosci!)<br>includi intervalli</div>
+        </td>
+        <td class="cat-tip">Tetto / triangolo, quadrato,<br>matita stilizzata.</td>
+        <td><div class="sym-draw-box"></div></td>
+        <td><span class="color-swatch" style="background:#d4972a"></span>Giallo/Oro</td>
+      </tr>
+      <tr>
+        <td class="sym-icon">
+          <svg class="sym" viewBox="0 0 28 28">
+            <circle cx="14" cy="14" r="8" fill="none" stroke="#7a9e7e" stroke-width="1.5"/>
+            <path d="M9 14 Q11 10 14 14 Q17 18 19 14" fill="none" stroke="#7a9e7e" stroke-width="1.5"/>
+          </svg>
+        </td>
+        <td>
+          <div class="cat-name" style="color:var(--sage)">🍽 Pasti</div>
+          <div class="cat-source">da: stima tua (colazione + pranzo + cena)<br>in minuti totali → converti in ore</div>
+        </td>
+        <td class="cat-tip">Forchetta, piatto visto dall'alto,<br>goccia, fiocco.</td>
+        <td><div class="sym-draw-box"></div></td>
+        <td><span class="color-swatch" style="background:#7a9e7e"></span>Verde salvia</td>
+      </tr>
+      <tr>
+        <td class="sym-icon">
+          <svg class="sym" viewBox="0 0 28 28">
+            <circle cx="10" cy="22" r="3.5" fill="none" stroke="#2a7d6e" stroke-width="1.5"/>
+            <circle cx="22" cy="22" r="3.5" fill="none" stroke="#2a7d6e" stroke-width="1.5"/>
+            <path d="M4 18 L8 12 L14 10 L22 12 L26 18" fill="none" stroke="#2a7d6e" stroke-width="1.5"/>
+          </svg>
+        </td>
+        <td>
+          <div class="cat-name" style="color:var(--teal)">🚌 Tragitto</div>
+          <div class="cat-source">da: stima (minuti casa→scuola × 2)<br>oppure Google Maps</div>
+        </td>
+        <td class="cat-tip">Freccia, bicicletta stilizzata,<br>onda doppia.</td>
+        <td><div class="sym-draw-box"></div></td>
+        <td><span class="color-swatch" style="background:#2a7d6e"></span>Verde acqua</td>
+      </tr>
+      <tr>
+        <td class="sym-icon">
+          <svg class="sym" viewBox="0 0 28 28">
+            <circle cx="14" cy="16" r="8" fill="none" stroke="#c96a5a" stroke-width="1.5"/>
+            <path d="M8 14 L11 13 L14 15 L17 15 L21 14" fill="none" stroke="#c96a5a" stroke-width="1.5"/>
+            <path d="M14 8 L14 4 M9 10 L6 7 M19 10 L22 7" stroke="#c96a5a" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </td>
+        <td>
+          <div class="cat-name" style="color:var(--rose)">⚽ Calcio / Sport</div>
+          <div class="cat-source">da: stima (allenamento, partita,<br>palestra, nuoto…)</div>
+        </td>
+        <td class="cat-tip">Esagono, pallone stilizzato,<br>stella, triangolo.</td>
+        <td><div class="sym-draw-box"></div></td>
+        <td><span class="color-swatch" style="background:#c96a5a"></span>Rosa/Rosso scuro</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- RULES -->
+  <div class="section-title">Le regole del disegno</div>
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-num">1</div>
+      <div class="rule-title">Una ora = un simbolo</div>
+      <div class="rule-body">Se hai usato il telefono 3 ore, disegna 3 simboli del telefono. Se hai dormito 8 ore, disegni 8 simboli del sonno. Le mezze ore? Disegna il simbolo a metà!</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">2</div>
+      <div class="rule-title">La legenda è obbligatoria</div>
+      <div class="rule-body">Nell'angolo del foglio, spiega cosa significa ogni simbolo e colore. Chi legge il tuo disegno deve capirlo senza chiederti nulla. Testalo con un compagno!</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">3</div>
+      <div class="rule-title">Sei libero sulla forma</div>
+      <div class="rule-body">Puoi disporre i simboli in cerchio, in linea, a spirale, come un mosaico, in ordine cronologico… Non ci sono regole sulla disposizione. Scegli quella che ti sembra più bella.</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">4</div>
+      <div class="rule-title">Raccogli per 7 giorni</div>
+      <div class="rule-body">Ogni sera (5 minuti!) compila la tabella qui sotto. Non aspettare la fine della settimana: i dati di ieri svaniscono dalla memoria (e dal telefono!).</div>
+    </div>
+  </div>
+
+  <!-- ESEMPIO -->
+  <div class="example-area">
+    <div class="example-label">Esempio — una giornata tipo disegnata con simboli</div>
+    <div class="example-row">
+      <div class="ex-item">
+        <svg width="60" height="20" viewBox="0 0 60 20">
+          <circle cx="10" cy="10" r="6" fill="#2a4d8f" opacity="0.8"/>
+          <circle cx="25" cy="10" r="6" fill="#2a4d8f" opacity="0.8"/>
+          <circle cx="40" cy="10" r="6" fill="#2a4d8f" opacity="0.8"/>
+          <circle cx="55" cy="10" r="6" fill="#2a4d8f" opacity="0.4"/>
+        </svg>
+        <span>💤 Sonno 7.5h</span>
+      </div>
+      <div style="font-size:8pt;opacity:0.3">+</div>
+      <div class="ex-item">
+        <svg width="48" height="20" viewBox="0 0 48 20">
+          <rect x="2" y="4" width="10" height="14" rx="1" fill="#d4972a" opacity="0.8"/>
+          <rect x="15" y="4" width="10" height="14" rx="1" fill="#d4972a" opacity="0.8"/>
+          <rect x="28" y="4" width="10" height="14" rx="1" fill="#d4972a" opacity="0.8"/>
+          <rect x="41" y="4" width="10" height="14" rx="1" fill="#d4972a" opacity="0.8"/>
+        </svg>
+        <span>🏫 Scuola 6h</span>
+      </div>
+      <div style="font-size:8pt;opacity:0.3">+</div>
+      <div class="ex-item">
+        <svg width="36" height="20" viewBox="0 0 36 20">
+          <polygon points="10,2 18,18 2,18" fill="none" stroke="#c9362a" stroke-width="1.5"/>
+          <polygon points="25,2 33,18 17,18" fill="none" stroke="#c9362a" stroke-width="1.5"/>
+          <polygon points="32,2 36,10 28,10" fill="#c9362a" opacity="0.5"/>
+        </svg>
+        <span>📱 Telefono 2.5h</span>
+      </div>
+      <div style="font-size:8pt;opacity:0.3">+ altri =</div>
+      <div class="ex-item">
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <!-- Pie mockup -->
+          <circle cx="20" cy="20" r="18" fill="#e8e4dc"/>
+          <path d="M20 20 L20 2 A18 18 0 0 1 38 20 Z" fill="#2a4d8f" opacity="0.85"/>
+          <path d="M20 20 L38 20 A18 18 0 0 1 20 38 Z" fill="#d4972a" opacity="0.85"/>
+          <path d="M20 20 L20 38 A18 18 0 0 1 3.5 27 Z" fill="#c9362a" opacity="0.85"/>
+          <path d="M20 20 L3.5 27 A18 18 0 0 1 2 20 Z" fill="#7a9e7e" opacity="0.85"/>
+          <path d="M20 20 L2 20 A18 18 0 0 1 20 2 Z" fill="#2a7d6e" opacity="0.85"/>
+          <circle cx="20" cy="20" r="8" fill="#fff"/>
+        </svg>
+        <span>24h visualizzate</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACKING TABLE -->
+  <div class="section-title">Tabella di raccolta dati — 7 giorni</div>
+  <div class="tracking-wrapper">
+    <table class="tg">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding-left:6px">Categoria</th>
+          <th>LUN</th>
+          <th>MAR</th>
+          <th>MER</th>
+          <th>GIO</th>
+          <th>VEN</th>
+          <th>SAB</th>
+          <th>DOM</th>
+          <th>Media</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat-cell">
+            <span class="color-swatch" style="background:#c9362a"></span>
+            <div class="tg-cat-name">📱 Telefono</div>
+            <div class="tg-cat-unit">ore (da Benessere Digitale)</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="cat-cell">
+            <span class="color-swatch" style="background:#2a4d8f"></span>
+            <div class="tg-cat-name">💤 Sonno</div>
+            <div class="tg-cat-unit">ore totali</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="cat-cell">
+            <span class="color-swatch" style="background:#d4972a"></span>
+            <div class="tg-cat-name">🏫 Scuola</div>
+            <div class="tg-cat-unit">ore (0 nei giorni festivi)</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="cat-cell">
+            <span class="color-swatch" style="background:#7a9e7e"></span>
+            <div class="tg-cat-name">🍽 Pasti</div>
+            <div class="tg-cat-unit">ore totali (stima)</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="cat-cell">
+            <span class="color-swatch" style="background:#2a7d6e"></span>
+            <div class="tg-cat-name">🚌 Tragitto</div>
+            <div class="tg-cat-unit">ore (andata + ritorno)</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="cat-cell">
+            <span class="color-swatch" style="background:#c96a5a"></span>
+            <div class="tg-cat-name">⚽ Sport/Calcio</div>
+            <div class="tg-cat-unit">ore (0 se nessun allenamento)</div>
+          </td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section-title">Riflessione finale</div>
+  <div class="notes-section">
+    <div class="notes-box">
+      <div class="notes-box-title">Cosa mi ha sorpreso nei miei dati</div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+    </div>
+    <div class="notes-box">
+      <div class="notes-box-title">Confronto con i compagni — differenze notate</div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+      <div class="note-line"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · TIC · Educazione Civica · a.s. 2025–26</span>
+    <span>Ispirato a <em>Dear Data</em> · Stefanie Posavec &amp; Giorgia Lupi, 2016</span>
+  </div>
+
+</div>
+</div>
+
+<div class="no-print" style="text-align:center;margin-top:20px;font-family:monospace;font-size:12px;color:#666">
+  <button onclick="window.print()" style="background:#1a1208;color:white;border:none;padding:10px 24px;font-family:monospace;cursor:pointer;font-size:12px;letter-spacing:0.1em">
+    🖨 STAMPA SCHEDA
+  </button>
+  &nbsp;
+  <span>· formato A4 · 1 per studente</span>
+</div>
+
+</body>
+</html>

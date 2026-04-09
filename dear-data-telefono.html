@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Data — Quanto uso il telefono?</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf6ef;
+    --ink: #1a1208;
+    --red: #c9362a;
+    --gold: #d4972a;
+    --teal: #2a7d6e;
+    --blue: #2a4d8f;
+    --rose: #c96a5a;
+    --sage: #7a9e7e;
+    --grid: rgba(26,18,8,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Graph paper background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- HEADER ---- */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 64px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .title-block h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .title-block h1 em {
+    color: var(--red);
+    font-style: italic;
+  }
+
+  .title-block .subtitle {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .meta-block {
+    text-align: right;
+    font-size: 0.72rem;
+    line-height: 2;
+    opacity: 0.6;
+  }
+
+  .inspiration-tag {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+  }
+
+  /* ---- SECTION LABELS ---- */
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.3;
+  }
+
+  /* ---- INTRO CARD ---- */
+  .intro-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 36px 40px;
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-card::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 200px;
+    position: absolute;
+    right: -10px;
+    top: -40px;
+    opacity: 0.06;
+    line-height: 1;
+  }
+
+  .intro-card p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    max-width: 600px;
+    opacity: 0.9;
+  }
+
+  .intro-card .author {
+    margin-top: 16px;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ---- TIMELINE / WEEK VIEW ---- */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 56px;
+  }
+
+  .day-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .day-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 6px 0;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .day-cell {
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .day-cell:hover { opacity: 0.8; }
+
+  .cell-phone    { background: var(--red);  }
+  .cell-sleep    { background: var(--blue); }
+  .cell-school   { background: var(--gold); }
+  .cell-food     { background: var(--sage); }
+  .cell-commute  { background: var(--teal); }
+  .cell-soccer   { background: var(--rose); }
+  .cell-other    { background: rgba(26,18,8,0.08); }
+
+  .hour-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px 0 0;
+    margin-right: 8px;
+    font-size: 0.6rem;
+    opacity: 0.4;
+    height: calc(24 * 22px + 28px);
+  }
+
+  /* ---- DATA TABLE ---- */
+  .scheda-raccolta {
+    margin-bottom: 56px;
+  }
+
+  .scheda-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .scheda-desc {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .data-row {
+    display: grid;
+    grid-template-columns: 18px 1fr 90px 90px auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(26,18,8,0.1);
+    font-size: 0.78rem;
+  }
+
+  .data-row:first-of-type {
+    border-top: 1px solid rgba(26,18,8,0.1);
+  }
+
+  .color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .category-name {
+    font-weight: 500;
+  }
+
+  .category-desc {
+    font-size: 0.68rem;
+    opacity: 0.5;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  .hours-input {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgba(26,18,8,0.3);
+    width: 80px;
+    text-align: center;
+    color: var(--ink);
+    padding: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .hours-input:focus {
+    border-bottom-color: var(--red);
+  }
+
+  .bar-container {
+    width: 120px;
+    height: 8px;
+    background: rgba(26,18,8,0.08);
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 0;
+    transition: width 0.5s ease;
+  }
+
+  /* ---- VISUALIZATION PREVIEW ---- */
+  .viz-section {
+    margin-bottom: 56px;
+  }
+
+  .viz-canvas {
+    background: white;
+    border: 1px solid rgba(26,18,8,0.12);
+    padding: 40px;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .pie-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+  }
+
+  .pie-canvas {
+    width: 200px;
+    height: 200px;
+  }
+
+  .pie-center-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .pie-hours {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--red);
+  }
+
+  .pie-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+  }
+
+  .legend {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+  }
+
+  .legend-swatch {
+    width: 32px;
+    height: 10px;
+    flex-shrink: 0;
+  }
+
+  .legend-name { flex: 1; }
+
+  .legend-val {
+    font-size: 0.9rem;
+    font-family: 'DM Serif Display', serif;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .legend-pct {
+    font-size: 0.65rem;
+    opacity: 0.4;
+    min-width: 38px;
+    text-align: right;
+  }
+
+  /* ---- INSTRUCTIONS SECTION ---- */
+  .instructions {
+    margin-bottom: 56px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    margin-top: 4px;
+  }
+
+  .step-card {
+    background: white;
+    border: 1px solid rgba(26,18,8,0.1);
+    padding: 24px;
+  }
+
+  .step-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.3;
+  }
+
+  .step-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .step-body {
+    font-size: 0.7rem;
+    line-height: 1.7;
+    opacity: 0.65;
+  }
+
+  .step-tag {
+    display: inline-block;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin-top: 10px;
+    border: 1px solid currentColor;
+  }
+
+  .tag-prima { color: var(--teal); border-color: var(--teal); }
+  .tag-seconda { color: var(--gold); border-color: var(--gold); }
+  .tag-entrambe { color: var(--ink); border-color: var(--ink); opacity: 0.4; }
+
+  /* ---- SCHEDA STAMPABILE ---- */
+  .print-section {
+    background: white;
+    border: 2px solid var(--ink);
+    padding: 40px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .print-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .print-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .print-fields {
+    font-size: 0.72rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+  }
+
+  .print-field {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .print-field label {
+    opacity: 0.5;
+  }
+
+  .print-field .field-line {
+    width: 120px;
+    border-bottom: 1px solid rgba(26,18,8,0.3);
+    height: 16px;
+  }
+
+  .tracking-grid {
+    display: grid;
+    grid-template-columns: 160px repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 24px;
+    font-size: 0.68rem;
+  }
+
+  .tg-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tg-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    border: 1px solid rgba(26,18,8,0.1);
+    font-size: 0.65rem;
+  }
+
+  .tg-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .tg-cell {
+    border: 1px solid rgba(26,18,8,0.1);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: rgba(26,18,8,0.2);
+  }
+
+  .notes-area {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .notes-box {
+    border: 1px solid rgba(26,18,8,0.15);
+    padding: 16px;
+    min-height: 100px;
+  }
+
+  .notes-box-title {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.4;
+    margin-bottom: 8px;
+  }
+
+  .notes-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .note-line {
+    border-bottom: 1px solid rgba(26,18,8,0.1);
+    height: 1px;
+  }
+
+  /* ---- SYMBOL GUIDE ---- */
+  .symbol-guide {
+    margin-bottom: 56px;
+  }
+
+  .symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .symbol-card {
+    border: 1px solid rgba(26,18,8,0.12);
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: white;
+  }
+
+  .symbol-shape {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .symbol-info .name {
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  .symbol-info .fonte {
+    font-size: 0.65rem;
+    opacity: 0.5;
+  }
+
+  /* ---- RUBRICA ---- */
+  .rubrica {
+    margin-bottom: 56px;
+  }
+
+  .rubrica-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.72rem;
+  }
+
+  .rubrica-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .rubrica-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(26,18,8,0.08);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .rubrica-table tr:nth-child(even) td {
+    background: rgba(26,18,8,0.02);
+  }
+
+  .voto-badge {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    padding: 2px 10px;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  /* ---- PRINT BUTTON ---- */
+  .print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .print-btn:hover { background: var(--ink); }
+
+  .secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 11px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 8px;
+  }
+
+  .secondary-btn:hover { background: var(--ink); color: var(--paper); }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 40px; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(26,18,8,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    opacity: 0.35;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ---- PRINT STYLES ---- */
+  @media print {
+    body::before { display: none; }
+    .no-print { display: none !important; }
+    .page { padding: 20px; }
+    .print-section {
+      page-break-inside: avoid;
+    }
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-label, .intro-card, .scheda-raccolta, .viz-section,
+  .steps-grid, .print-section, .rubrica {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .step-card:nth-child(1) { animation-delay: 0.05s; }
+  .step-card:nth-child(2) { animation-delay: 0.1s; }
+  .step-card:nth-child(3) { animation-delay: 0.15s; }
+  .step-card:nth-child(4) { animation-delay: 0.2s; }
+  .step-card:nth-child(5) { animation-delay: 0.25s; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .dim { opacity: 0.45; font-size: 0.75rem; margin-bottom: 24px; }
+
+  svg text { font-family: 'DM Mono', monospace; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="title-block">
+      <div class="inspiration-tag">Dear Data Project</div>
+      <h1>Quanto uso<br><em>il telefono?</em></h1>
+      <p class="subtitle">Educazione civica · Benessere digitale · Classi 1ª e 2ª TIC</p>
+    </div>
+    <div class="meta-block no-print">
+      <div>Ispirato a</div>
+      <div><strong>Stefanie Posavec</strong></div>
+      <div>&amp; Giorgia Lupi</div>
+      <div style="margin-top:8px">Dear Data, 2016</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section-label">Il progetto</div>
+  <div class="intro-card">
+    <p>
+      Stefanie Posavec e Giorgia Lupi si sono scambiate per un anno intero cartoline disegnate a mano — ogni settimana un dato diverso, ogni simbolo tracciato con cura. Nessun computer, nessun grafico automatico. Solo carta, penna, e la cura di tradurre la propria vita in forma visiva. <br><br>
+      In questo progetto farete lo stesso: raccoglierete per una settimana i dati sul vostro uso del telefono e li confronterete con come passate il resto del tempo. Poi li disegnerete. Poi li digitalizzerete.
+    </p>
+    <div class="author">Fonte: Posavec &amp; Lupi, <em>Dear Data</em> (2016) · Progetto adattato per la scuola</div>
+  </div>
+
+  <!-- STEP BY STEP -->
+  <div class="section-label no-print">Come funziona</div>
+  <div class="instructions no-print">
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-title">Raccogli i dati</div>
+        <div class="step-body">Ogni sera per 7 giorni, apri <strong>Benessere Digitale</strong> (Android) o <strong>Tempo di utilizzo</strong> (iPhone) e annota le ore di schermo. Raccogli anche le altre categorie con la scheda.</div>
+        <span class="step-tag tag-entrambe">Entrambe le classi</span>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-title">Disegna su carta</div>
+        <div class="step-body">Usa la legenda dei simboli qui sotto. Ogni ora = un simbolo. Crea la tua visualizzazione su carta A4 o A3. Scegli colori, forme, disposizioni. Non ci sono regole fisse.</div>
+        <span class="step-tag tag-entrambe">Entrambe le classi</span>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-title">Scrivi la legenda</div>
+        <div class="step-body">Ogni visualizzazione deve avere una legenda leggibile. Chi guarda il tuo disegno deve poter capire da solo cosa significano i simboli, senza chiederti nulla.</div>
+        <span class="step-tag tag-prima">Classi prime</span>
+      </div>
+      <div class="step-card">
+        <div class="step-number">04</div>
+        <div class="step-title">Digitalizza e analizza</div>
+        <div class="step-body">Fotografa o scannerizza. Le seconde producono anche una pagina HTML di presentazione del proprio dato. Calcola medie, confronta con i compagni, trova pattern.</div>
+        <span class="step-tag tag-seconda">Classi seconde</span>
+      </div>
+      <div class="step-card">
+        <div class="step-number">05</div>
+        <div class="step-title">Dossier finale</div>
+        <div class="step-body">Tutti contribuiscono al dossier di classe: la visualizzazione, i dati, la riflessione scritta. Il dossier finale raccoglie tutti i lavori in un unico documento condiviso.</div>
+        <span class="step-tag tag-entrambe">Entrambe le classi</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA COLLECTION TOOL -->
+  <div class="section-label">Raccolta dati interattiva</div>
+  <div class="scheda-raccolta">
+    <h2>Inserisci i tuoi dati</h2>
+    <p class="dim">Ore medie giornaliere per categoria — la barra si aggiorna in tempo reale</p>
+
+    <div id="data-rows">
+      <!-- JS populated -->
+    </div>
+
+    <div style="margin-top: 24px; font-size: 0.7rem; opacity: 0.5; display: flex; justify-content: space-between;">
+      <span>Totale ore inserite: <strong id="total-hours">0</strong> / 24</span>
+      <span id="warning" style="color: var(--red); display:none">⚠ Superato il limite di 24 ore/giorno</span>
+    </div>
+  </div>
+
+  <!-- VISUALIZATION -->
+  <div class="section-label">Anteprima visualizzazione</div>
+  <div class="viz-section">
+    <h2>La tua giornata media</h2>
+    <p class="dim">Proporzioni basate sui dati inseriti sopra</p>
+
+    <div class="viz-canvas">
+      <div class="pie-container">
+        <canvas class="pie-canvas" id="pieChart" width="200" height="200"></canvas>
+        <div class="pie-center-text">
+          <div class="pie-hours" id="phone-hours-display">—</div>
+          <div class="pie-label">ore tel.</div>
+        </div>
+      </div>
+      <div class="legend" id="pie-legend">
+        <!-- JS populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SYMBOL GUIDE -->
+  <div class="section-label">Guida ai simboli — per il disegno su carta</div>
+  <div class="symbol-guide">
+    <h2>Scegli i tuoi simboli</h2>
+    <p class="dim">Questi sono suggerimenti — puoi inventarne di tuoi! L'importante è avere una legenda chiara.</p>
+
+    <div class="symbols-grid">
+      <div class="symbol-card">
+        <div class="symbol-shape">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <rect x="12" y="6" width="16" height="28" rx="2" fill="none" stroke="#c9362a" stroke-width="2"/>
+            <rect x="16" y="30" width="8" height="2" rx="1" fill="#c9362a"/>
+            <circle cx="20" cy="10" r="1.5" fill="#c9362a"/>
+          </svg>
+        </div>
+        <div class="symbol-info">
+          <div class="name" style="color:var(--red)">📱 Telefono</div>
+          <div class="fonte">da Benessere Digitale</div>
+        </div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-shape">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <path d="M8 20 Q20 6 32 20 Q20 34 8 20Z" fill="none" stroke="#2a4d8f" stroke-width="2"/>
+            <circle cx="20" cy="20" r="4" fill="#2a4d8f"/>
+          </svg>
+        </div>
+        <div class="symbol-info">
+          <div class="name" style="color:var(--blue)">💤 Sonno</div>
+          <div class="fonte">diario o smartwatch</div>
+        </div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-shape">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <rect x="6" y="14" width="28" height="18" rx="1" fill="none" stroke="#d4972a" stroke-width="2"/>
+            <path d="M6 14 L20 6 L34 14" fill="none" stroke="#d4972a" stroke-width="2"/>
+            <rect x="17" y="22" width="6" height="10" fill="#d4972a" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="symbol-info">
+          <div class="name" style="color:var(--gold)">🏫 Scuola</div>
+          <div class="fonte">orario scolastico</div>
+        </div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-shape">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="10" fill="none" stroke="#7a9e7e" stroke-width="2"/>
+            <path d="M14 20 Q17 14 20 20 Q23 26 26 20" fill="none" stroke="#7a9e7e" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="symbol-info">
+          <div class="name" style="color:var(--sage)">🍽 Pasti</div>
+          <div class="fonte">stima personale</div>
+        </div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-shape">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <circle cx="14" cy="28" r="5" fill="none" stroke="#2a7d6e" stroke-width="2"/>
+            <circle cx="28" cy="28" r="5" fill="none" stroke="#2a7d6e" stroke-width="2"/>
+            <path d="M8 22 L12 16 L20 14 L30 16 L34 22" fill="none" stroke="#2a7d6e" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="symbol-info">
+          <div class="name" style="color:var(--teal)">🚌 Tragitto</div>
+          <div class="fonte">casa↔scuola</div>
+        </div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-shape">
+          <svg width="40" height="40" viewBox="0 0 40 40">
+            <circle cx="20" cy="22" r="10" fill="none" stroke="#c96a5a" stroke-width="2"/>
+            <path d="M20 12 L20 6 M14 14 L10 10 M26 14 L30 10" stroke="#c96a5a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 22 L18 20 L20 22 L22 22 L26 22" fill="none" stroke="#c96a5a" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="symbol-info">
+          <div class="name" style="color:var(--rose)">⚽ Calcio</div>
+          <div class="fonte">sport / attività fisica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINT SHEET -->
+  <div class="section-label">Scheda di raccolta dati — stampabile</div>
+  <div class="print-section" id="print-sheet">
+    <div class="print-header">
+      <div>
+        <div class="print-title">Dear Data<br><em>Quanto uso il telefono?</em></div>
+        <div style="font-size:0.7rem; opacity:0.5; margin-top:8px">Settimana di raccolta dati</div>
+      </div>
+      <div class="print-fields">
+        <div class="print-field">
+          <label>Nome</label>
+          <div class="field-line"></div>
+        </div>
+        <div class="print-field">
+          <label>Classe</label>
+          <div class="field-line"></div>
+        </div>
+        <div class="print-field">
+          <label>Dal</label>
+          <div class="field-line" style="width:80px"></div>
+        </div>
+        <div class="print-field">
+          <label>Al</label>
+          <div class="field-line" style="width:80px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracking-grid" id="tracking-grid">
+      <div class="tg-header">Categoria</div>
+      <div class="tg-header">LUN</div>
+      <div class="tg-header">MAR</div>
+      <div class="tg-header">MER</div>
+      <div class="tg-header">GIO</div>
+      <div class="tg-header">VEN</div>
+      <div class="tg-header">SAB</div>
+      <div class="tg-header">DOM</div>
+    </div>
+
+    <div class="notes-area">
+      <div class="notes-box">
+        <div class="notes-box-title">Osservazioni / pattern notati</div>
+        <div class="notes-lines">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+        </div>
+      </div>
+      <div class="notes-box">
+        <div class="notes-box-title">Riflessione personale — mi ha sorpreso che...</div>
+        <div class="notes-lines">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(26,18,8,0.1); font-size:0.62rem; opacity:0.35; display:flex; justify-content:space-between;">
+      <span>IPSSEOA Andrea Barbarigo · TIC · Educazione Civica</span>
+      <span>Ispirato a Dear Data · Posavec &amp; Lupi, 2016</span>
+    </div>
+  </div>
+
+  <!-- RUBRICA -->
+  <div class="section-label">Valutazione</div>
+  <div class="rubrica">
+    <h2>Rubrica di valutazione</h2>
+    <p class="dim">La scheda vale come voto pratico — contribuisce anche al colloquio orale</p>
+
+    <table class="rubrica-table">
+      <thead>
+        <tr>
+          <th style="width:200px">Criterio</th>
+          <th>Ottimo</th>
+          <th>Sufficiente</th>
+          <th>Insufficiente</th>
+          <th style="width:60px">Peso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Raccolta dati</strong><br><span style="font-size:0.65rem;opacity:0.5">accuratezza e completezza</span></td>
+          <td>7 giorni completi, tutte le categorie, fonte indicata</td>
+          <td>≥ 5 giorni, categorie principali presenti</td>
+          <td>Dati incompleti o non credibili</td>
+          <td style="text-align:center"><span class="voto-badge">25%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Visualizzazione</strong><br><span style="font-size:0.65rem;opacity:0.5">disegno su carta</span></td>
+          <td>Simboli coerenti, legenda chiara, esteticamente curata</td>
+          <td>Leggibile, legenda presente ma incompleta</td>
+          <td>Illeggibile o senza legenda</td>
+          <td style="text-align:center"><span class="voto-badge">30%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Riflessione scritta</strong><br><span style="font-size:0.65rem;opacity:0.5">dossier</span></td>
+          <td>Analisi personale, confronto con compagni, proposta di cambiamento</td>
+          <td>Descrizione dei dati, almeno una osservazione</td>
+          <td>Assente o copiata</td>
+          <td style="text-align:center"><span class="voto-badge">25%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Digitalizzazione</strong><br><span style="font-size:0.65rem;opacity:0.5">solo classi seconde</span></td>
+          <td>Pagina HTML ben strutturata, immagine integrata, responsive</td>
+          <td>Pagina HTML funzionante con dati presenti</td>
+          <td>Assente o non funzionante</td>
+          <td style="text-align:center"><span class="voto-badge">20%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btn-row no-print">
+    <button class="print-btn" onclick="window.print()">🖨 Stampa scheda raccolta</button>
+    <button class="secondary-btn" onclick="exportData()">↓ Esporta dati CSV</button>
+  </div>
+
+  <footer>
+    <span>IPSSEOA Andrea Barbarigo · TIC · a.s. 2025–26</span>
+    <span>Ispirato a <em>Dear Data</em> di Stefanie Posavec &amp; Giorgia Lupi</span>
+    <span>Educazione Civica · Benessere Digitale</span>
+  </footer>
+
+</div>
+
+<script>
+const CATEGORIES = [
+  { id: 'phone',   label: '📱 Telefono',    desc: 'da Benessere Digitale / Tempo di utilizzo', color: '#c9362a', default: 3 },
+  { id: 'sleep',   label: '💤 Sonno',        desc: 'ore di sonno notturno',                     color: '#2a4d8f', default: 8 },
+  { id: 'school',  label: '🏫 Scuola',       desc: 'orario scolastico incluso intervallo',       color: '#d4972a', default: 6 },
+  { id: 'food',    label: '🍽 Pasti',         desc: 'colazione + pranzo + cena',                 color: '#7a9e7e', default: 1.5 },
+  { id: 'commute', label: '🚌 Tragitto',     desc: 'andata + ritorno casa↔scuola',               color: '#2a7d6e', default: 1 },
+  { id: 'soccer',  label: '⚽ Calcio/Sport', desc: 'allenamento o partita',                      color: '#c96a5a', default: 0 },
+];
+
+const values = {};
+CATEGORIES.forEach(c => { values[c.id] = c.default; });
+
+function buildDataRows() {
+  const container = document.getElementById('data-rows');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const row = document.createElement('div');
+    row.className = 'data-row';
+    row.innerHTML = `
+      <div class="color-dot" style="background:${cat.color}"></div>
+      <div>
+        <div class="category-name">${cat.label}</div>
+        <div class="category-desc">${cat.desc}</div>
+      </div>
+      <div>
+        <input type="number" class="hours-input" min="0" max="24" step="0.5"
+          value="${cat.default}" data-id="${cat.id}"
+          oninput="updateValue('${cat.id}', this.value)">
+        <span style="font-size:0.65rem;opacity:0.4"> ore/giorno</span>
+      </div>
+      <div class="bar-container">
+        <div class="bar-fill" id="bar-${cat.id}" style="background:${cat.color}; width:${(cat.default/24*100)}%"></div>
+      </div>
+      <div id="pct-${cat.id}" style="font-size:0.7rem;opacity:0.45;min-width:36px;text-align:right">${Math.round(cat.default/24*100)}%</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function updateValue(id, val) {
+  values[id] = parseFloat(val) || 0;
+  const total = Object.values(values).reduce((a,b) => a+b, 0);
+  document.getElementById('total-hours').textContent = total.toFixed(1);
+  document.getElementById('warning').style.display = total > 24 ? 'block' : 'none';
+  CATEGORIES.forEach(cat => {
+    const pct = Math.min(values[cat.id] / 24 * 100, 100);
+    const bar = document.getElementById('bar-' + cat.id);
+    const pctEl = document.getElementById('pct-' + cat.id);
+    if (bar) bar.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = Math.round(pct) + '%';
+  });
+  drawPie();
+  buildLegend();
+}
+
+function drawPie() {
+  const canvas = document.getElementById('pieChart');
+  const ctx = canvas.getContext('2d');
+  const W = 200, H = 200, cx = W/2, cy = H/2, r = 85, ri = 48;
+  ctx.clearRect(0, 0, W, H);
+
+  const total = Object.values(values).reduce((a,b) => a+b, 0) || 24;
+  let start = -Math.PI / 2;
+
+  CATEGORIES.forEach(cat => {
+    const v = values[cat.id];
+    if (v <= 0) return;
+    const angle = (v / total) * 2 * Math.PI;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, start + angle);
+    ctx.closePath();
+    ctx.fillStyle = cat.color;
+    ctx.fill();
+    ctx.strokeStyle = '#faf6ef';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    start += angle;
+  });
+
+  // Donut hole
+  ctx.beginPath();
+  ctx.arc(cx, cy, ri, 0, 2 * Math.PI);
+  ctx.fillStyle = '#faf6ef';
+  ctx.fill();
+
+  document.getElementById('phone-hours-display').textContent =
+    values.phone > 0 ? values.phone + 'h' : '—';
+}
+
+function buildLegend() {
+  const total = Object.values(values).reduce((a,b) => a+b, 0) || 24;
+  const legend = document.getElementById('pie-legend');
+  legend.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const pct = Math.round(values[cat.id] / total * 100);
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `
+      <div class="legend-swatch" style="background:${cat.color}"></div>
+      <div class="legend-name">${cat.label}</div>
+      <div class="legend-val">${values[cat.id]}h</div>
+      <div class="legend-pct">${pct}%</div>
+    `;
+    legend.appendChild(item);
+  });
+}
+
+function buildTrackingGrid() {
+  const grid = document.getElementById('tracking-grid');
+  CATEGORIES.forEach(cat => {
+    const label = document.createElement('div');
+    label.className = 'tg-label';
+    label.innerHTML = `<div class="tg-dot" style="background:${cat.color}"></div>${cat.label}`;
+    grid.appendChild(label);
+    for (let d = 0; d < 7; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'tg-cell';
+      cell.textContent = '___';
+      grid.appendChild(cell);
+    }
+  });
+}
+
+function exportData() {
+  let csv = 'Categoria,Ore/giorno,% della giornata\n';
+  const total = Object.values(values).reduce((a,b) => a+b, 0) || 24;
+  CATEGORIES.forEach(cat => {
+    const pct = (values[cat.id] / total * 100).toFixed(1);
+    csv += `"${cat.label}",${values[cat.id]},${pct}%\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'dear-data-telefono.csv';
+  a.click();
+}
+
+// Init
+buildDataRows();
+buildTrackingGrid();
+drawPie();
+buildLegend();
+updateValue('phone', 3); // trigger initial render
+</script>
+</body>
+</html>
