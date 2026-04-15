@@ -952,6 +952,31 @@
 </style>
 </head>
 <body>
+
+<a href="#gofullpage" style="
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: #E8351A;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 0 #1a1208;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+">📸 GoFullPage →</a>
+
+<style>
+  @media print { a[href="#gofullpage"] { display: none !important; } }
+</style>
+
 <div class="page wf-page"><!-- HEADER -->
 <div class="header">
   <div class="title-block">
@@ -1613,6 +1638,173 @@
   <div class="footer">
     <span>IPSSEOA Andrea Barbarigo · Venezia</span>
     <span class="hi">Recipe Glow Up — Prompt Chain</span>
+    <span>a.s. 2024–25</span>
+  </div>
+</div>
+
+<!-- GOFULLPAGE GUIDE -->
+<div id="gofullpage" class="page" style="font-family:'DM Sans',sans-serif;color:#1a1208;">
+
+<style>
+  .gfp-tag {
+    display: inline-block;
+    background: #E8351A;
+    color: white;
+    font-family: 'Syne', 'Playfair Display', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .gfp-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid #1a1208;
+  }
+  .gfp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: #1a1208;
+  }
+  .gfp-title span { color: #E8351A; }
+  .gfp-subtitle { margin-top: 6px; font-size: 11px; color: #888; font-style: italic; }
+  .gfp-icon { font-size: 48px; line-height: 1; }
+  .gfp-alert {
+    background: #fff3cd;
+    border: 2px solid #E8A020;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .gfp-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+  .gfp-step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+    align-items: start;
+    background: #fff;
+    border: 2px solid #1a1208;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 2px 2px 0 #1a1208;
+  }
+  .gfp-num {
+    width: 40px;
+    height: 40px;
+    background: #1a1208;
+    color: #FBF6EE;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .gfp-step:nth-child(2) .gfp-num { background: #E8351A; }
+  .gfp-step:nth-child(3) .gfp-num { background: #7A9E7E; }
+  .gfp-step:nth-child(4) .gfp-num { background: #E8A020; color: #1a1208; }
+  .gfp-step:nth-child(5) .gfp-num { background: #1a1208; }
+  .gfp-step-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; color: #1a1208; }
+  .gfp-step-desc { font-size: 11.5px; line-height: 1.5; color: #333; }
+  .gfp-step-desc strong { color: #1a1208; }
+  .gfp-url-box {
+    background: #1a1208;
+    color: #FBF6EE;
+    border-radius: 4px;
+    padding: 7px 12px;
+    margin-top: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    word-break: break-all;
+  }
+  .gfp-filename-box {
+    background: #fff8ee;
+    border: 1.5px dashed #E8A020;
+    border-radius: 4px;
+    padding: 7px 12px;
+    margin-top: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    color: #1a1208;
+    line-height: 1.6;
+  }
+  .gfp-filename-box em { color: #E8351A; font-style: normal; font-weight: 700; }
+</style>
+
+<div class="gfp-header">
+  <div>
+    <div class="gfp-tag">🍽️ Recipe Glow Up — Dossier</div>
+    <div class="gfp-title">Screenshot<br><span>della tua pagina</span></div>
+    <div class="gfp-subtitle">Usa GoFullPage per catturare tutta la pagina in un colpo solo</div>
+  </div>
+  <div class="gfp-icon">📸</div>
+</div>
+
+<div class="gfp-alert">
+  <span style="font-size:16px;flex-shrink:0">⚠️</span>
+  <span>Usa <strong>Google Chrome</strong>. GoFullPage non funziona su Firefox o Safari. Se il tuo PC non ha Chrome, chiedi alla prof.</span>
+</div>
+
+<div class="gfp-steps">
+  <div class="gfp-step">
+    <div class="gfp-num">1</div>
+    <div>
+      <div class="gfp-step-title">Installa l'estensione GoFullPage</div>
+      <p class="gfp-step-desc">Apri Chrome e vai all'indirizzo qui sotto. Clicca <strong>Aggiungi a Chrome</strong> → <strong>Aggiungi estensione</strong>. La farai una volta sola.</p>
+      <div class="gfp-url-box">chrome.google.com/webstore → cerca: <strong>GoFullPage</strong></div>
+    </div>
+  </div>
+  <div class="gfp-step">
+    <div class="gfp-num">2</div>
+    <div>
+      <div class="gfp-step-title">Apri la tua pagina su GitHub Pages</div>
+      <p class="gfp-step-desc">Vai sul browser e apri la tua pagina pubblicata. L'indirizzo ha questa forma:</p>
+      <div class="gfp-url-box">nomeutente.github.io/nome-repository</div>
+    </div>
+  </div>
+  <div class="gfp-step">
+    <div class="gfp-num">3</div>
+    <div>
+      <div class="gfp-step-title">Clicca l'icona GoFullPage</div>
+      <p class="gfp-step-desc">In alto a destra nel browser trovi l'icona della fotocamera 📷. Cliccaci sopra. La pagina scorrerà automaticamente e verrà catturata per intero. Aspetta qualche secondo senza toccare niente!</p>
+    </div>
+  </div>
+  <div class="gfp-step">
+    <div class="gfp-num">4</div>
+    <div>
+      <div class="gfp-step-title">Scarica e rinomina il file</div>
+      <p class="gfp-step-desc">Si aprirà una nuova scheda con l'anteprima. Clicca <strong>Download PNG</strong>. Poi rinomina il file così:</p>
+      <div class="gfp-filename-box"><em>cognome</em>_<em>nome</em>_ricetta.png<br>Esempio: <em>rossi_marco_carbonara.png</em></div>
+    </div>
+  </div>
+  <div class="gfp-step">
+    <div class="gfp-num">5</div>
+    <div>
+      <div class="gfp-step-title">Carica su Google Drive</div>
+      <p class="gfp-step-desc">Apri la cartella Drive della classe indicata dalla prof e trascina il file dentro. Fatto! ✅</p>
+    </div>
+  </div>
+</div>
+
+  <div class="footer">
+    <span>IPSSEOA Andrea Barbarigo · Venezia</span>
+    <span class="hi">Recipe Glow Up — GoFullPage</span>
     <span>a.s. 2024–25</span>
   </div>
 </div>
